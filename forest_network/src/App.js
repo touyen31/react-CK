@@ -9,7 +9,8 @@ class App extends Component {
     return (
         <div>
             <Profile/>
-          <Follow/>
+          {/*<Follow/>*/}
+
         </div>
 
     );

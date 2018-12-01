@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
 import './Follow.css'
+import Itemfollow from "./itemfollow";
 
 class Follow extends Component {
     render() {
+        const {data} = this.props
         return (
             <div className="follow">
-                <div className="title">Danh sách follower</div>
-                <div className="content">
-                    <img className="avatar" src="http://lorempixel.com/70/70"/>
-                    <div className="info">
-                        <div>aaaa</div>
-                        <div>bbbbbb</div>
-                    </div>
-                </div>
+                <div className="title">{this.props.title}</div>
+                {data.map((item, index)=> <Itemfollow key={index} item={item}/>)}
             </div>
         );
     }
