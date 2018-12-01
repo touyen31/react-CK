@@ -1,0 +1,40 @@
+.profile {
+    margin:20px 0px;
+    width:300px;
+    font-family:sans-serif;
+    background-color:#eee;
+    border-radius:3px;
+}
+
+.profile-content{
+    position:relative;
+    top:-35px;
+    left:20px;
+    width:260px;
+}
+
+.profile-identity {
+    display:inline-block;
+    text-align:left;
+}
+
+.profile-username {
+    font-size:11px;
+}
+
+ul {
+    margin:15px 0 0 0;
+    padding:0;
+    text-align:center;
+}
+
+li.stats-item {
+    font-size:11px;
+    display:inline-block;
+    margin:0 10px;
+}
+
+.stat-value {
+    font-size:16px;
+    color:blue;
+}
