@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Profile.css'
+import connect from "react-redux/es/connect/connect";
 
 class Profile extends Component {
     render() {
@@ -7,26 +8,26 @@ class Profile extends Component {
             <div>
                 <ul id="profiles"></ul>
                 <div className="profile template">
-                    <img className="profile-bg" src="http://lorempixel.com/300/70"/>
+                    <img className="profile-bg" src={this.props.profile.background}/>
                     <div className="profile-content">
-                        <img className="profile-img" src="http://lorempixel.com/70/70"/>
-                            <div className="profile-identity">
-                                <div className="profile-name">Andrew Walpole</div>
-                                <div className="profile-username">@walpolea</div>
-                            </div>
+                        <img className="profile-img" src={this.props.profile.avatar}/>
+                        <div className="profile-identity">
+                            <div className="profile-name">{this.props.profile.name}</div>
+                            <div className="profile-username">{this.props.profile.account}</div>
+                        </div>
                     </div>
                     <ul className="user-stats">
                         <li className="stats-item tweets">
                             <div className="stat-title">TWEETS</div>
-                            <div className="stat-value">3411</div>
+                            <div className="stat-value">{this.props.profile.tweets}</div>
                         </li>
                         <li className="stats-item following">
                             <div className="stat-title">FOLLOWING</div>
-                            <div className="stat-value">418</div>
+                            <div className="stat-value">{this.props.profile.following}</div>
                         </li>
                         <li className="stats-item followers">
                             <div className="stat-title">FOLLOWERS</div>
-                            <div className="stat-value">322</div>
+                            <div className="stat-value">{this.props.profile.follower}</div>
                         </li>
                     </ul>
                 </div>
@@ -35,5 +36,10 @@ class Profile extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ( {
+    profile:state.appReducer.profile
+})
+const mapDispathToProps = (dispatch)=>({
 
-export default Profile;
+})
+export default connect(mapStateToProps,mapDispathToProps)(Profile);

@@ -1,7 +1,7 @@
 .profile {
     margin:20px 0px;
     width:300px;
-    font-family:sans-serif;
+    font-family:"Times New Roman";
     background-color:#eee;
     border-radius:3px;
 }
@@ -16,10 +16,15 @@
 .profile-identity {
     display:inline-block;
     text-align:left;
+    margin-left: 10px;
+}
+.profile-information{
+    text-align: left;
+    font-size:16px;
 }
 
 .profile-username {
-    font-size:11px;
+    font-size:16px;
 }
 
 ul {
@@ -29,12 +34,12 @@ ul {
 }
 
 li.stats-item {
-    font-size:11px;
+    font-size:15px;
     display:inline-block;
     margin:0 10px;
 }
 
 .stat-value {
-    font-size:16px;
+    font-size:19px;
     color:blue;
 }
