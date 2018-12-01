@@ -1,3 +1,6 @@
+.profilewaper{
+    display: flex;
+}
 .profile {
     margin:20px 0px;
     width:300px;
@@ -5,12 +8,21 @@
     background-color:#eee;
     border-radius:3px;
 }
+.profile-bg{
+    width: 300px;
+    height: 70px;
+
+}
 
 .profile-content{
     position:relative;
     top:-35px;
     left:20px;
     width:260px;
+}
+.profile-name{
+    margin-right: 10px;
+    width: 100px;
 }
 
 .profile-identity {

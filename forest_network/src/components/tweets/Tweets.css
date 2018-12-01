@@ -1,0 +1,28 @@
+.tweetsaa{
+    margin:20px 0px;
+    width:500px;
+    font-family:"Times New Roman";
+    background-color:#eee;
+    border-radius:3px;
+    font-size: 16px;
+    margin-left: 20px;
+}
+.content{
+    display:flex;
+    text-align:left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.behavior{
+    display: flex;
+    margin-left: 10px;
+}
+.textname{
+    font-weight: bold;
+    color: black;
+}
+.text{
+    margin-left: 10px;
+    color: gray;
+    margin-right: 20px;
+}
