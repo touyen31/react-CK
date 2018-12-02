@@ -45,8 +45,24 @@ class Profile extends Component {
             <div className="profilewaper">
                 <div className="profile template">
                     <img className="profile-bg" src={this.props.profile.background}/>
+                    <div className="profile-navbar">
+                        <ul className="user-stats">
+                            <li className="stats-item tweets" onClick={()=>this.handleClickTweets()}>
+                                <div className="stat-title">TWEETS</div>
+                                <div className="stat-value">{this.props.profile.tweets}</div>
+                            </li>
+                            <li className="stats-item following" onClick={()=>this.handleClickFollowing()}>
+                                <div className="stat-title">FOLLOWING</div>
+                                <div className="stat-value">{this.props.profile.following}</div>
+                            </li>
+                            <li className="stats-item followers" onClick={()=>this.handleClickFollower()}>
+                                <div className="stat-title">FOLLOWERS</div>
+                                <div className="stat-value">{this.props.profile.follower}</div>
+                            </li>
+                        </ul>
+                    </div>
                     <div className="profile-content">
-                        <img className="profile-img" src={this.props.profile.avatar}/>
+                        <img className="profile-avt" src={this.props.profile.avatar}/>
                         <div className="profile-identity">
                             <div style={{display:'flex'}}>
                                 <input className="profile-name"
@@ -60,20 +76,6 @@ class Profile extends Component {
                             <div className="profile-username">{this.props.profile.account}</div>
                         </div>
                     </div>
-                    <ul className="user-stats">
-                        <li className="stats-item tweets" onClick={()=>this.handleClickTweets()}>
-                            <div className="stat-title">TWEETS</div>
-                            <div className="stat-value">{this.props.profile.tweets}</div>
-                        </li>
-                        <li className="stats-item following" onClick={()=>this.handleClickFollowing()}>
-                            <div className="stat-title">FOLLOWING</div>
-                            <div className="stat-value">{this.props.profile.following}</div>
-                        </li>
-                        <li className="stats-item followers" onClick={()=>this.handleClickFollower()}>
-                            <div className="stat-title">FOLLOWERS</div>
-                            <div className="stat-value">{this.props.profile.follower}</div>
-                        </li>
-                    </ul>
                     {this.state.checkfollowing && <Follow title={'Danh sách following'} data={this.props.following}/>}
                     {this.state.checkfollower && <Follow title ={'Danh sách follower'}  data={this.props.follower}/>}
                 </div>
