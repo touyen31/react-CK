@@ -6,7 +6,7 @@ class ItemTweet extends Component {
         const {item} =this.props
         return (
             <div className="content">
-                <img className="imageme" src={item.avatar}></img>
+                <img alt="avatar" className="imageme" src={item.avatar}></img>
                 <div>
                     <div className="behavior">
                         <div className="textname">{item.name}</div>

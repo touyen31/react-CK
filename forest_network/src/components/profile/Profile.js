@@ -44,7 +44,7 @@ class Profile extends Component {
         return (
             <div >
                 <div className="profile template">
-                    <img className="profile-bg" src={this.props.profile.background}/>
+                    <img alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
                     <div className="profile-navbar">
                         <ul className="user-stats">
                             <li className="stats-item tweets" onClick={()=>this.handleClickTweets()}>
@@ -62,7 +62,7 @@ class Profile extends Component {
                         </ul>
                     </div>
                     <div className="profile-content">
-                        <img className="profile-avt" src={this.props.profile.avatar}/>
+                        <img alt="avt" className="profile-avt" src={this.props.profile.avatar}/>
                         <div className="profile-identity">
                             <div style={{display:'flex'}}>
                                 <input className="profile-name"

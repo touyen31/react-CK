@@ -5,7 +5,7 @@ class Itemfollow extends Component {
         const {item} = this.props
         return (
                 <div className="content">
-                    <img className="avatar" src={item.avatar}/>
+                    <img alt="avatar" className="avatar" src={item.avatar}/>
                     <div className="info">
                         <div>{item.name}</div>
                         <div>{item.account}</div>
