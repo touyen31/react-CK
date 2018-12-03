@@ -4,6 +4,7 @@ import connect from "react-redux/es/connect/connect";
 import Follow from "../follow/Follow";
 import Tweets from "../tweets/Tweets";
 import {updateprofile} from '../action'
+import {Col, Grid, Image} from "react-bootstrap";
 
 
 class Profile extends Component {
@@ -12,7 +13,7 @@ class Profile extends Component {
         this.state={
             checkfollowing:false,
             checkfollower:false,
-            checktweets:false,
+            checktweets:true,
             checkEditName:true,
             name:''
         }
@@ -44,7 +45,7 @@ class Profile extends Component {
         return (
             <div >
                 <div className="profile template">
-                    <img alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
+                    <Image alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
                     <div className="profile-navbar">
                         <ul className="user-stats">
                             <li className="stats-item tweets" onClick={()=>this.handleClickTweets()}>
@@ -61,25 +62,34 @@ class Profile extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div className="profile-content">
-                        <img alt="avt" className="profile-avt" src={this.props.profile.avatar}/>
-                        <div className="profile-identity">
-                            <div style={{display:'flex'}}>
-                                <input className="profile-name"
-                                       value={this.state.name}
-                                       disabled={this.state.checkEditName} onChange={(e)=>this.handleUpdateProfile(e)}/>
-                                {this.state.checkEditName ? <i className="fas fa-edit" onClick={()=>this.handleClickEdit()}></i>
-                                : <button onClick={()=> this.handleSave()}>Save</button>
-                                }
-
+                    <Image circle thumbnail alt="avt" className="profile-content" src={this.props.profile.avatar}/>
+                    <Grid>
+                        <Col sm={6} md={3}>
+                            <div className="profile-identity">
+                                <div style={{display:'flex'}}>
+                                    <input className="profile-name"
+                                           value={this.state.name}
+                                           disabled={this.state.checkEditName} onChange={(e)=>this.handleUpdateProfile(e)}/>
+                                    {this.state.checkEditName ? <i className="fas fa-edit" onClick={()=>this.handleClickEdit()}></i>
+                                        : <button onClick={()=> this.handleSave()}>Save</button>
+                                    }
+                                </div>
+                                <div className="profile-username">{this.props.profile.account}</div>
                             </div>
-                            <div className="profile-username">{this.props.profile.account}</div>
-                        </div>
-                    </div>
-                    {this.state.checkfollowing && <Follow title={'Danh sách following'} data={this.props.following}/>}
-                    {this.state.checkfollower && <Follow title ={'Danh sách follower'}  data={this.props.follower}/>}
+                        </Col>
+                        <Col sm={6} md={6} className="profile-middle">
+                            {this.state.checktweets && <Tweets data={this.props.tweets}/>}
+                            {this.state.checkfollowing && <Follow title={'Danh sách following'} data={this.props.following}/>}
+                            {this.state.checkfollower && <Follow title ={'Danh sách follower'}  data={this.props.follower}/>}
+                        </Col>
+                        <Col sm={6} md={3}>
+
+                        </Col>
+                    </Grid>
+
+
                 </div>
-                {this.state.checktweets && <Tweets data={this.props.tweets}/>}
+
 
             </div>
 

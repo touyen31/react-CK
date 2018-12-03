@@ -2,35 +2,33 @@
     display: flex;
 }
 .profile {
-    width:100%;
     font-family:"Times New Roman";
     background-color:#eee;
     border-radius:3px;
 }
 .profile-bg{
     width: 100%;
-    height: 175px;
+    height: 250px;
+}
+
+.profile-avatar {
+    position: relative;
+
 }
 
 .profile-navbar {
     width: 100%;
     height: 60px;
-    background-color: darkgrey;
-}
-
-.profile-avt {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: thick white;
+    background-color: white;
 }
 
 .profile-content{
     position:relative;
-    top:-180px;
+    top:-200px;
     left:40px;
     width:260px;
 }
+
 .profile-name{
     margin-right: 10px;
     width: 100px;
@@ -48,6 +46,10 @@
 
 .profile-username {
     font-size:16px;
+}
+
+.profile-middle {
+    background-color: white;
 }
 
 ul {

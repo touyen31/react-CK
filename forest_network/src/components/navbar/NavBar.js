@@ -5,7 +5,7 @@ import {Button, Form, FormControl, Nav, Navbar, NavItem, Glyphicon, InputGroup, 
 class NavBar extends Component {
     render() {
         return (
-            <Navbar bg="light" expand="lg" collapseOnSelect>
+            <Navbar fixedTop bg="light" expand="lg" collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 </Navbar.Header>
