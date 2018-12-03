@@ -5,10 +5,10 @@ const initialState={
     following:[{avatar:'http://via.placeholder.com/50x50', name: 'AAAA', account: '@aaaaaaa'}, {avatar:'http://via.placeholder.com/50x50', name: 'BBBB', account: '@bbbbbbb'}],
     follower:[{avatar:'http://via.placeholder.com/50x50', name: 'CCCCC', account: '@cccccc'}, {avatar:'http://via.placeholder.com/50x50', name: 'DDDD', account: '@dddd'}, {avatar:'http://via.placeholder.com/50x50', name: 'EEEEE', account: '@eeee'}],
     tweets:[
-        {avatar:'http://via.placeholder.com/50x50', name: 'CCCCC', account: '@cccccc', comment:2, react:10, share:10,
-            content:'hello hello hello hello hello hello hello hellohello'},
-        {avatar:'http://via.placeholder.com/50x50', name: 'EEEE', account: '@eeeee', comment:5, react:4, share:6, content:'hello hello hello hello hello hello hello hellohello'},
-        {avatar:'http://via.placeholder.com/50x50', name: 'CCCCC', account: '@cccccc', comment:2, react:2, share:5, content:'hello hello hello hello hello hello hello hellohello'},
+        {avatar:'http://via.placeholder.com/50x50', name: 'To Uyen', account: '@banhcom', comment:2, react:10, share:10,
+            content:'hello hello hello hello hello hello hello hellohello', time:'3m'},
+        {avatar:'http://via.placeholder.com/50x50', name: 'To Uyen', account: '@banhcom', comment:5, react:4, share:6, content:'hello hello hello hello hello hello hello hellohello', time:'1hour'},
+        {avatar:'http://via.placeholder.com/50x50', name: 'To Uyen', account: '@banhcom', comment:2, react:2, share:5, content:'hello hello hello hello hello hello hello hellohello', time:'03/12/2018'},
     ]
 }
 const appReducer = (prevState = initialState, action) => {

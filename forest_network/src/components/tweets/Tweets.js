@@ -6,7 +6,11 @@ class Tweets extends Component {
         const {data} = this.props
         return (
             <div className="tweetsaa">
-                <div>Tweets</div>
+                <div className="textname">Tweets</div>
+                <div className="posttweet">
+                    <img className="imageme" src="http://via.placeholder.com/50x50"/>
+                    <input className="textareatweet"></input>
+                </div>
                 {data.map((item, index)=><ItemTweet key={index} item={item}/>)}
             </div>
         );

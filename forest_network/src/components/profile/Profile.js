@@ -21,13 +21,13 @@ class Profile extends Component {
         this.setState({name:this.props.profile.name})
     }
     handleClickFollowing(){
-        this.setState({checkfollowing:!this.state.checkfollowing, checkfollower:false})
+        this.setState({checkfollowing:!this.state.checkfollowing, checkfollower:false, checktweets:false})
     }
     handleClickFollower(){
-        this.setState({checkfollowing:false, checkfollower:!this.state.checkfollower})
+        this.setState({checkfollowing:false, checkfollower:!this.state.checkfollower, checktweets:false})
     }
     handleClickTweets(){
-        this.setState({checktweets:!this.state.checktweets})
+        this.setState({checktweets:!this.state.checktweets,checkfollowing:false, checkfollower:false })
     }
     handleClickEdit(){
         this.setState({checkEditName:!this.state.checkEditName})
@@ -42,7 +42,7 @@ class Profile extends Component {
     }
     render() {
         return (
-            <div className="profilewaper">
+            <div >
                 <div className="profile template">
                     <img className="profile-bg" src={this.props.profile.background}/>
                     <div className="profile-navbar">
