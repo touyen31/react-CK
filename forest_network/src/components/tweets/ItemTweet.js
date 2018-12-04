@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './Tweets.css'
 import DetailTweet from "./detailTweet";
+
 class ItemTweet extends Component {
     constructor(){
         super()
@@ -8,6 +9,7 @@ class ItemTweet extends Component {
             showPopup: false
         }
     }
+
     render() {
         const {item} =this.props
         return (
@@ -33,11 +35,7 @@ class ItemTweet extends Component {
                     </div>
                 </div>
                 {
-                    this.state.showPopup &&
-                    <div className='popup'>
-                        <DetailTweet/>
-                        <i className="fas fa-times" style={{marginLeft:70}} onClick={()=> this.setState({showPopup:false})}></i>
-                    </div>
+                    this.state.showPopup && <DetailTweet/>
                 }
             </Fragment>
         );
