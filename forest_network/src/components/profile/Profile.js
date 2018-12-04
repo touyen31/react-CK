@@ -4,7 +4,7 @@ import connect from "react-redux/es/connect/connect";
 import Follow from "../follow/Follow";
 import Tweets from "../tweets/Tweets";
 import {updateprofile} from '../action'
-import {Col, Glyphicon, Grid, Image} from "react-bootstrap";
+import {Button, Col, FormControl, Glyphicon, Grid, Image} from "react-bootstrap";
 
 
 class Profile extends Component {
@@ -67,11 +67,11 @@ class Profile extends Component {
                         <Col sm={6} md={3}>
                             <div className="profile-identity">
                                 <div style={{display:'flex'}}>
-                                    <input className="profile-name"
+                                    <FormControl className="profile-name"
                                            value={this.state.name}
                                            disabled={this.state.checkEditName} onChange={(e)=>this.handleUpdateProfile(e)}/>
-                                    {this.state.checkEditName ? <i className="fas fa-edit" onClick={()=>this.handleClickEdit()}></i>
-                                        : <button onClick={()=> this.handleSave()}>Save</button>
+                                    {this.state.checkEditName ? <Glyphicon glyph="edit" onClick={()=>this.handleClickEdit()}/>
+                                        : <Button onClick={()=> this.handleSave()}>Save</Button>
                                     }
                                 </div>
                                 <div className="profile-username">{this.props.profile.account}</div>
