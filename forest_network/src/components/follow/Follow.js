@@ -7,7 +7,7 @@ class Follow extends Component {
         const {data} = this.props
         return (
             <div className="follow">
-                <div className="title">{this.props.title}</div>
+                {/*<div className="title">{this.props.title}</div>*/}
                 {data.map((item, index)=> <Itemfollow key={index} item={item}/>)}
             </div>
         );

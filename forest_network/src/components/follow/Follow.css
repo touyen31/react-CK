@@ -1,8 +1,8 @@
 .follow {
     font-family:"Times New Roman";
-    background-color:white;
     border-radius:3px;
     font-size: 16px;
+    display:flex;
 }
 .follow .title{
     font-size: 19px;
@@ -13,13 +13,47 @@
 .follow .content{
     display:flex;
     text-align:left;
-    margin-left: 10px;
-    margin-top: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 .avatar{
     border-radius: 100%;
+    width: 50px;
+    height: 50px;
 }
 .info{
+    display:inline-block;
     text-align:left;
     margin-left: 10px;
+    margin-top: -20px;
+}
+.profiles {
+    width:300px;
+    font-family:sans-serif;
+    background-color: white;
+    border-radius:3px;
+}
+
+.profile-contents{
+    position:relative;
+    display: flex;
+    align-items: baseline;
+    top:-25px;
+    left:10px;
+    width:260px;
+    justify-content: space-around;
+}
+.profile-names{
+    font-weight: bold;
+}
+
+.profile-usernames {
+    font-size:16px;
+}
+.btnfollow{
+    border-radius: 25px;
+    font-weight: bolder;
+    height: 30px;
+    float: right;
+    margin-left: 20px;
 }

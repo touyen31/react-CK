@@ -18,6 +18,11 @@
     justify-content: center;
     background-color: aliceblue;
 }
+.chitiet{
+    position: absolute;
+    z-index: 1;
+    background-color: #61dafb;
+}
 
 .profile-avatar{
     position:absolute;

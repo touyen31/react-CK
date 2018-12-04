@@ -2,8 +2,8 @@ import {UPDATEPROFILE} from '../action'
 
 const initialState={
     profile:{name:'Tố Uyên', account:'@banhcom', tweets:20, following:100, follower:20, background:'https://pbs.twimg.com/profile_banners/824815001152135169/1533970929/1500x500', avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg'},
-    following:[{avatar:'http://via.placeholder.com/50x50', name: 'AAAA', account: '@aaaaaaa'}, {avatar:'http://via.placeholder.com/50x50', name: 'BBBB', account: '@bbbbbbb'}],
-    follower:[{avatar:'http://via.placeholder.com/50x50', name: 'CCCCC', account: '@cccccc'}, {avatar:'http://via.placeholder.com/50x50', name: 'DDDD', account: '@dddd'}, {avatar:'http://via.placeholder.com/50x50', name: 'EEEEE', account: '@eeee'}],
+    following:[{avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'AAAA', account: '@aaaaaaa'}, {avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'BBBB', account: '@bbbbbbb'}],
+    follower:[{avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'CCCCC', account: '@cccccc'}, {avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'DDDD', account: '@dddd'}, {avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'EEEEE', account: '@eeee'}],
     tweets:[
         {avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'Tố Uyên', account: '@banhcom', comment:2, react:10, share:10, content:'hello hello hello hello hello hello hello hellohello', time:'3m'},
         {avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'Tố Uyên', account: '@banhcom', comment:5, react:4, share:6, content:'hello hello hello hello hello hello hello hellohello', time:'1hour'},
