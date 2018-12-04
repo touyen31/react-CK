@@ -15,6 +15,12 @@
 
 .nav-tweet {
     border-radius: 25px;
+    font-weight: bolder;
+}
+
+.nav-avt {
+    width: 35px;
+    height: 35px;
 }
 
 .nav-item {

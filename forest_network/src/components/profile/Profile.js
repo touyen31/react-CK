@@ -63,7 +63,7 @@ class Profile extends Component {
                             </li>
                         </ul>
                     </div>
-                    <Grid>
+                    <Grid className="profile-content">
                         <Col sm={6} md={3}>
                             <div className="profile-identity">
                                 <div style={{display:'flex'}}>

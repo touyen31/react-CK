@@ -1,8 +1,7 @@
 .follow {
-    margin:20px 0px;
     width:300px;
     font-family:"Times New Roman";
-    background-color:#eee;
+    background-color:white;
     border-radius:3px;
     font-size: 16px;
 }
@@ -10,6 +9,7 @@
     font-size: 19px;
     font-weight: bold;
     text-decoration-line: underline;
+    margin-left: 10px;
 }
 .follow .content{
     display:flex;

@@ -23,7 +23,7 @@ class NavBar extends Component {
                     </Nav>
                     <Nav pullRight className="nav-item">
                         <NavItem>
-                            <Image circle src="http://via.placeholder.com/35x35"/>
+                            <Image circle  className="nav-avt" src="https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg"/>
                         </NavItem>
                         <NavItem>
                             <Button bsStyle="info" className="nav-tweet">Tweet</Button>

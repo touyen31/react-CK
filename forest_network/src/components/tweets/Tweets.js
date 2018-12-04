@@ -8,7 +8,7 @@ class Tweets extends Component {
             <div className="tweetsaa">
                 <div className="textname">Tweets</div>
                 <div className="posttweet">
-                    <img alt="avt" className="imageme" src="http://via.placeholder.com/50x50"/>
+                    <img alt="avt" className="imageme" src="https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg"/>
                     <input className="textareatweet"></input>
                 </div>
                 {data.map((item, index)=><ItemTweet key={index} item={item}/>)}
