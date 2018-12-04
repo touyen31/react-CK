@@ -5,8 +5,18 @@
 
 .nav-input {
     border-radius: 25px;
+    background-color: white;
+    border: 0;
 }
 
 .nav-form-input {
     margin-right: 0px;
+}
+
+.nav-tweet {
+    border-radius: 25px;
+}
+
+.nav-item {
+    margin-top: -5px;
 }

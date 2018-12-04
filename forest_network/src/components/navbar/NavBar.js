@@ -21,9 +21,13 @@ class NavBar extends Component {
                             <Glyphicon glyph="envelope"/> Messages
                         </NavItem>
                     </Nav>
-                    <Nav pullRight>
-                        <Image circle src="http://via.placeholder.com/35x35"/> {' '}
-                        <Button bsStyle="info" className="nav-input">Tweet</Button>
+                    <Nav pullRight className="nav-item">
+                        <NavItem>
+                            <Image circle src="http://via.placeholder.com/35x35"/>
+                        </NavItem>
+                        <NavItem>
+                            <Button bsStyle="info" className="nav-tweet">Tweet</Button>
+                        </NavItem>
                     </Nav>
                     <Nav pullRight inline>
                         <Navbar.Form pullRight className="nav-form-input">

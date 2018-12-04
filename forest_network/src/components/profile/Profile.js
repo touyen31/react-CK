@@ -4,7 +4,7 @@ import connect from "react-redux/es/connect/connect";
 import Follow from "../follow/Follow";
 import Tweets from "../tweets/Tweets";
 import {updateprofile} from '../action'
-import {Col, Grid, Image} from "react-bootstrap";
+import {Col, Glyphicon, Grid, Image} from "react-bootstrap";
 
 
 class Profile extends Component {
@@ -22,13 +22,13 @@ class Profile extends Component {
         this.setState({name:this.props.profile.name})
     }
     handleClickFollowing(){
-        this.setState({checkfollowing:!this.state.checkfollowing, checkfollower:false, checktweets:false})
+        this.setState({checkfollowing:true, checkfollower:false, checktweets:false})
     }
     handleClickFollower(){
-        this.setState({checkfollowing:false, checkfollower:!this.state.checkfollower, checktweets:false})
+        this.setState({checkfollowing:false, checkfollower:true, checktweets:false})
     }
     handleClickTweets(){
-        this.setState({checktweets:!this.state.checktweets,checkfollowing:false, checkfollower:false })
+        this.setState({checktweets:true, checkfollowing:false, checkfollower:false })
     }
     handleClickEdit(){
         this.setState({checkEditName:!this.state.checkEditName})
@@ -45,24 +45,24 @@ class Profile extends Component {
         return (
             <div >
                 <div className="profile template">
+                    <Image circle thumbnail alt="avt" className="profile-avatar" src={this.props.profile.avatar}/>
                     <Image alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
                     <div className="profile-navbar">
                         <ul className="user-stats">
                             <li className="stats-item tweets" onClick={()=>this.handleClickTweets()}>
-                                <div className="stat-title">TWEETS</div>
+                                <div className="stat-title">Tweets</div>
                                 <div className="stat-value">{this.props.profile.tweets}</div>
                             </li>
                             <li className="stats-item following" onClick={()=>this.handleClickFollowing()}>
-                                <div className="stat-title">FOLLOWING</div>
+                                <div className="stat-title">Following</div>
                                 <div className="stat-value">{this.props.profile.following}</div>
                             </li>
                             <li className="stats-item followers" onClick={()=>this.handleClickFollower()}>
-                                <div className="stat-title">FOLLOWERS</div>
+                                <div className="stat-title">Followers</div>
                                 <div className="stat-value">{this.props.profile.follower}</div>
                             </li>
                         </ul>
                     </div>
-                    <Image circle thumbnail alt="avt" className="profile-content" src={this.props.profile.avatar}/>
                     <Grid>
                         <Col sm={6} md={3}>
                             <div className="profile-identity">
