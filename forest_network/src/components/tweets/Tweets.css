@@ -43,3 +43,15 @@
     border-radius: 10px;
     margin: 15px;
 }
+.popup{
+    width: 100%;
+    position: absolute;
+    display: flex;
+    height: 500px;
+    transform: translateX(-50%);
+    background-color:white;
+    top: 0px;
+    left: 50%;
+    z-index: 10;
+    box-shadow: 0 0 2px 8px
+}

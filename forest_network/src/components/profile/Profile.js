@@ -86,8 +86,6 @@ class Profile extends Component {
 
                         </Col>
                     </Grid>
-
-                    <div className="chitiet">chi tiết</div>
                 </div>
 
 

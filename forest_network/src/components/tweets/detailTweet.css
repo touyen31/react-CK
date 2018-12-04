@@ -1,0 +1,25 @@
+.information{
+    display: flex;
+    align-items: center;
+}
+.information .user{
+    margin-left: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+
+}
+.information .account{
+    margin-left: 10px;
+}
+.contaner{
+    text-align: left;
+}
+.line{
+    height: 1px;
+    background-color: #eeeeee;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.information .behavior {
+    display: flex;
+}
