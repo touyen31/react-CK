@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Profile from "./components/profile/Profile";
-import NavBar from "./components/navbar/NavBar";
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import Login from './components/login'
+import Home from './components/home'
+import AuthenticateCom from './components/AuthenticateCom'
+import UnAuthenticateCom from './components/UnAuthenticateCom'
 class App extends Component {
-  render() {
+    render() {
     return (
-        <div>
-            <NavBar/>
-            <Profile/>
+        <BrowserRouter>
+            <Switch>
+                <UnAuthenticateCom exact path={'/login'} component={Login}/>
+                <AuthenticateCom path='/' component={Home}/>
+            </Switch>
 
-        </div>
+
+        </BrowserRouter>
 
     );
   }

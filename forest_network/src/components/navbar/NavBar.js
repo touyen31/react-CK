@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import "./NavBar.css"
 import {Button, Form, FormControl, Nav, Navbar, NavItem, Glyphicon, InputGroup, Image} from "react-bootstrap";
-
+import {withRouter} from 'react-router-dom'
 class NavBar extends Component {
     render() {
         return (
@@ -11,7 +11,7 @@ class NavBar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav>
-                        <NavItem href="#" className="nav-brand">
+                        <NavItem className="nav-brand" onClick={() => this.props.history.push('/')}>
                             <Glyphicon glyph="home"/> Home
                         </NavItem>
                         <NavItem href="#" className="nav-brand">
@@ -22,7 +22,7 @@ class NavBar extends Component {
                         </NavItem>
                     </Nav>
                     <Nav pullRight className="nav-item">
-                        <NavItem>
+                        <NavItem onClick={() =>this.props.history.push('/info')}>
                             <Image circle  className="nav-avt" src="https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg"/>
                         </NavItem>
                         <NavItem>
@@ -45,4 +45,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

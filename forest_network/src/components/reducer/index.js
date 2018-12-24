@@ -1,4 +1,4 @@
-import {UPDATEPROFILE} from '../action'
+import {UPDATEPROFILE, AUTHENTICATE} from '../action'
 
 const initialState={
     profile:{name:'Tố Uyên', account:'@banhcom', tweets:20, following:100, follower:20, background:'https://pbs.twimg.com/profile_banners/824815001152135169/1533970929/1500x500', avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg'},
@@ -12,7 +12,12 @@ const initialState={
     comment:[
         {avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg', name: 'Văn Tú', account: '@vantu', comment:1, react:2, share:1, content:'comment1', time:'3m'},
         {avatar:'http://mcm-bt0hsn6c.stackpathdns.com/wp-content/uploads/2016/02/hybrid-rose-pink.jpg', name: 'Hoa Hồng', account: '@nhuquynhsayhi', comment:1, react:0, share:1, content:'comment2', time:'8:17 03/12/2018'},
-    ]
+    ],
+    authenticate: {
+        publickey: null,
+        secretkey: null,
+        isAuthenticated: false
+    }
 }
 const appReducer = (prevState = initialState, action) => {
     switch(action.type)
@@ -22,6 +27,15 @@ const appReducer = (prevState = initialState, action) => {
             newprofile.name = action.data;                        //updating value
             return{
                 ...prevState, profile:newprofile
+            }
+        case AUTHENTICATE:
+            console.log(action)
+            return {
+                ...prevState,
+                authenticate: {
+                    ...action.data,
+                    isAuthenticated: true
+                }
             }
         default:
             return prevState;
