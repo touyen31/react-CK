@@ -4,20 +4,9 @@ import Profile from '../profile/Profile'
 import {Route} from 'react-router-dom'
 import './home.css'
 import {Col, Grid} from "react-bootstrap";
-import Follow from "../follow/Follow";
-import Itemfollow from "../follow/itemfollow";
 import DashboardProfileCard from "./DashboardProfileCard";
 
 class Home extends Component {
-    constructor() {
-        super()
-        this.state = {
-            avatar: null,
-            wallpaper: null,
-            name: 'Name',
-            username: '@Username',
-        }
-    }
 
     render() {
         return (
