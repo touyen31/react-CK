@@ -111,3 +111,14 @@ export const getinfo = async (publickey)=>{
             alert(e.message)
         })
 }
+
+export const getTotalMoney = async (publickey)=>{
+    const url ='http://localhost:5000/account/'+publickey+'/money'
+    return await axios.get(url)
+        .then(res=>{
+            return res.data.totalMoney
+        })
+        .catch(e=>{
+            alert(e.message)
+        })
+}
