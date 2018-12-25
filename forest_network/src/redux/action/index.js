@@ -1,6 +1,23 @@
 import {Keypair} from 'stellar-base'
+import axios from 'axios'
 export const UPDATEPROFILE = 'UPDATEPROFILE'
 export const AUTHENTICATE = 'AUTHENTICATE'
+export const GETMYNAME = 'GETMYNAME'
+
+export const getmyname = (publickey)=> dispatch => {
+    const url ='http://localhost:5000/account/'+publickey+'/name'
+   return axios.get(url)
+        .then(res=>{
+            dispatch({
+                type:GETMYNAME,
+                data:res.data.Name
+            })
+        })
+        .catch(e=>{
+            alert(e.message)
+        })
+
+}
 
 export const updateprofile = (profile)=>{
     return {

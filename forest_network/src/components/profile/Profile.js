@@ -3,10 +3,11 @@ import './Profile.css'
 import connect from "react-redux/es/connect/connect";
 import Follow from "../follow/Follow";
 import Tweets from "../tweets/Tweets";
-import {updateprofile} from '../action'
+import {GETMYNAME, getmyname} from '../../redux/action'
 import {Route}from'react-router-dom'
 import makeTransaction from '../../lib/makeTransaction'
 import {Button, Col, FormControl, Glyphicon, Grid, Image} from "react-bootstrap";
+import axios from 'axios'
 
 
 class Profile extends Component {
@@ -24,19 +25,29 @@ class Profile extends Component {
 
 
     componentDidMount(){
-        this.setState({name:this.props.profile.name})
+        this.getmyname()
+        //this.props.getmyname(this.props.authenticate.publickey)
     }
+
+    getmyname(){
+        const url ='http://localhost:5000/account/'+this.props.authenticate.publickey+'/name'
+        return axios.get(url)
+            .then(res=>{
+               this.setState({name:res.data.Name})
+            })
+            .catch(e=>{
+                alert(e.message)
+            })
+    }
+
     handleClickFollowing(){
         this.props.history.push('/info/following')
-        this.setState({checkfollowing:true, checkfollower:false, checktweets:false})
     }
     handleClickFollower(){
         this.props.history.push('/info/follower')
-        this.setState({checkfollowing:false, checkfollower:true, checktweets:false})
     }
     handleClickTweets(){
         this.props.history.push('/info/')
-        this.setState({checktweets:true, checkfollowing:false, checkfollower:false })
     }
     handleClickEdit(){
         this.setState({checkEditName:!this.state.checkEditName})
@@ -46,19 +57,19 @@ class Profile extends Component {
         this.setState({name:e.target.value})
     }
     async handleSave(){
+
         let params = {
             key: 'name',
             value: this.state.name
         }
         try {
-            await makeTransaction('GDBES2U6KZW5FJ7IRPTS4PFBYRTAXDMIADQQY3VLY2QNNXK3Z3NMM3E7', 'update_account', params, 'SAJDP4NOQYTFIK3YYUIKOPWG5WZZ37GSVT4AQ6GHFTSLLWSPFMHKCWMW')
+            await makeTransaction(this.props.authenticate.publickey, 'update_account', params, this.props.authenticate.secretkey)
+            this.getmyname();
             alert('thanh cong')
         }catch (e) {
             alert('loi')
         }
-
         this.setState({checkEditName:!this.state.checkEditName})
-        this.props.updateprofile(this.state.name)
     }
 
     handleFileChange = (event) => {
@@ -194,11 +205,13 @@ const mapStateToProps = (state) => ( {
     profile:state.appReducer.profile,
     following:state.appReducer.following,
     follower:state.appReducer.follower,
-    tweets:state.appReducer.tweets
+    tweets:state.appReducer.tweets,
+    authenticate:state.appReducer.authenticate
 })
 const mapDispathToProps = (dispatch)=>({
 
-    updateprofile: (profile)=>(dispatch(updateprofile(profile)))
+    // updateprofile: (profile)=>(dispatch(updateprofile(profile)))
+    getmyname:(publickey) => dispatch(getmyname(publickey))
 
 })
 export default connect(mapStateToProps,mapDispathToProps)(Profile);

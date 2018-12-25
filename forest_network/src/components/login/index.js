@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Button from './Button'
-import {authenticate} from '../action'
 import './login.css'
+import {authenticate} from '../../redux/action'
+
 class Login extends Component {
     state = {
         secret: ''
