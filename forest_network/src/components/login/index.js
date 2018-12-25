@@ -16,7 +16,6 @@ class Login extends Component {
                 <div className = "form-box" >
                     <div className = "head" > Forest Network </div>
                         <form action="#" id="login-form">
-                            <input className="form-control" placeholder="Public Key"/>
                             <input className="form-control" placeholder="Secret Key" onChange={this.setValue}/>
                             <button className="btn-login" onClick={() => this.props.authenticate(this.state.secret)}>LOGIN</button>
                             <p className="text-p">1512649 - 1512658 - ĐACK Công nghệ mới</p>
