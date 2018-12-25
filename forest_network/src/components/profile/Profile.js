@@ -3,10 +3,13 @@ import './Profile.css'
 import connect from "react-redux/es/connect/connect";
 import Follow from "../follow/Follow";
 import Tweets from "../tweets/Tweets";
-import {GETMYNAME, getmyname} from '../../redux/action'
+import {GETMYNAME} from '../../redux/action'
 import {Route}from'react-router-dom'
 import makeTransaction from '../../lib/makeTransaction'
 import {Button, Col, FormControl, Glyphicon, Grid, Image} from "react-bootstrap";
+
+import {getSequence, getmyname, getAllMyStatus, getFollower, getFollowing, getAvatar}from '../../redux/action'
+
 import axios from 'axios'
 
 
@@ -14,31 +17,31 @@ class Profile extends Component {
     constructor(props){
         super()
         this.state={
-            checkfollowing:false,
-            checkfollower:false,
-            checktweets:true,
+
             checkEditName:true,
             name:'',
-            file: null
+            file: null,
+            dataStatus:[],
+            dataFollowing:[],
+            dataFollower:[],
+            sequence:0
         }
     }
 
 
-    componentDidMount(){
-        this.getmyname()
-        //this.props.getmyname(this.props.authenticate.publickey)
+    componentDidMount = async ()=>{
+        const myPublickey = this.props.authenticate.publickey
+        let name =await getmyname(myPublickey)
+        let status = await getAllMyStatus(myPublickey)
+        let following = await getFollowing(myPublickey)
+        let follower = await getFollower(myPublickey)
+        let sequence = await getSequence(myPublickey)
+        let avatar = await getAvatar(myPublickey)
+        console.log('avatar:' +avatar)
+        this.setState({name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar })
     }
 
-    getmyname(){
-        const url ='http://localhost:5000/account/'+this.props.authenticate.publickey+'/name'
-        return axios.get(url)
-            .then(res=>{
-               this.setState({name:res.data.Name})
-            })
-            .catch(e=>{
-                alert(e.message)
-            })
-    }
+
 
     handleClickFollowing(){
         this.props.history.push('/info/following')
@@ -145,7 +148,7 @@ class Profile extends Component {
         return (
             <div >
                 <div className="profile template">
-                    <Image circle thumbnail alt="avt" className="profile-avatar" src={this.props.profile.avatar}/>
+                    <Image circle thumbnail alt="avt" className="profile-avatar" src={this.state.file}/>
                     <input type='file' onChange={this.handleFileChange} style={{position: 'absolute', top: 200, left: 100}} />
                     <button style={{position: 'absolute', top: 300, left: 100}} onClick={() => this.uphinh()}>Luu</button>
                     <Image alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
@@ -154,15 +157,23 @@ class Profile extends Component {
                         <ul className="user-stats">
                             <li className="stats-item tweets" onClick={()=>this.handleClickTweets()}>
                                 <div className="stat-title">Tweets</div>
-                                <div className="stat-value">{this.props.profile.tweets}</div>
+                                <div className="stat-value">{this.state.dataStatus.length}</div>
                             </li>
                             <li className="stats-item following" onClick={()=>this.handleClickFollowing()}>
                                 <div className="stat-title">Following</div>
-                                <div className="stat-value">{this.props.profile.following}</div>
+                                <div className="stat-value">{this.state.dataFollowing.length}</div>
                             </li>
                             <li className="stats-item followers" onClick={()=>this.handleClickFollower()}>
                                 <div className="stat-title">Followers</div>
+                                <div className="stat-value">{this.state.dataFollower.length}</div>
+                            </li>
+                            <li className="stats-item followers">
+                                <div className="stat-title">energy</div>
                                 <div className="stat-value">{this.props.profile.follower}</div>
+                            </li>
+                            <li className="stats-item followers">
+                                <div className="stat-title">Sequence</div>
+                                <div className="stat-value">{this.state.sequence}</div>
                             </li>
                         </ul>
                     </div>
@@ -181,13 +192,9 @@ class Profile extends Component {
                             </div>
                         </Col>
                         <Col sm={6} md={6} className="profile-middle">
-                            <Route exact path={'/info/following'} render={() =><Follow title={'Danh sách following'} data={this.props.following}/>}/>
-                            <Route  exact path={'/info/follower'} render={() =><Follow title ={'Danh sách follower'}  data={this.props.follower}/>}/>
-                            <Route exact path={'/info/'} render={() => <Tweets data={this.props.tweets}/>}/>
-
-                            {/*{this.state.checktweets && <Tweets data={this.props.tweets}/>}*/}
-                            {/*{this.state.checkfollowing && <Follow title={'Danh sách following'} data={this.props.following}/>}*/}
-                            {/*{this.state.checkfollower && <Follow title ={'Danh sách follower'}  data={this.props.follower}/>}*/}
+                            <Route exact path={'/info/following'} render={() =><Follow title={'Danh sách following'} data={this.state.dataFollowing}/>}/>
+                            <Route  exact path={'/info/follower'} render={() =><Follow title ={'Danh sách follower'}  data={this.state.dataFollowing}/>}/>
+                            <Route exact path={'/info/'} render={() => <Tweets data={this.state.dataStatus} account={this.props.authenticate.publickey}/>}/>
                         </Col>
                         <Col sm={6} md={3}>
 
