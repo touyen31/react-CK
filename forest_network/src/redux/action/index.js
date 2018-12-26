@@ -62,7 +62,6 @@ export const getAllMyStatus = async (publickey)=>{
     const url ='http://localhost:5000/account/'+publickey+'/status'
     try {
         let res = await axios.get(url);
-        console.log(res)
         return res.data.data
     } catch (e) {
         return[]
@@ -131,6 +130,7 @@ export const getTotalMoney = async (publickey)=>{
         })
 }
 
+
 export const getAllStatusRelationship = async (publickey) => {
     const url = 'http://localhost:5000/account/'+publickey+'/all'
     return await axios.get(url)
@@ -142,3 +142,24 @@ export const getAllStatusRelationship = async (publickey) => {
             alert(e.message)
         })
 }
+
+export const getInteractComment = async (hash)=>{
+    const url ='http://localhost:5000/account/comment/'+hash
+    try {
+        let res = await axios.get(url);
+        return res.data.comment
+    } catch (e) {
+        return[]
+    }
+}
+
+export const getEnergy = async (publickey)=>{
+    const url ='http://localhost:5000/account/'+publickey+'/energy'
+    try {
+        let res = await axios.get(url);
+        return res.data.energy
+    } catch (e) {
+        return[]
+    }
+}
+

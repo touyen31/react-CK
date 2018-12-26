@@ -8,7 +8,7 @@ import {Route}from'react-router-dom'
 import makeTransaction from '../../lib/makeTransaction'
 import {Button, Col, FormControl, Glyphicon, Grid, Image} from "react-bootstrap";
 
-import {getSequence, getmyname, getAllMyStatus, getFollower, getFollowing, getAvatar, getTotalMoney}from '../../redux/action'
+import {getSequence, getmyname, getAllMyStatus, getFollower, getFollowing, getAvatar, getTotalMoney, getEnergy}from '../../redux/action'
 
 import Payment from "../payment/Payment";
 import Itemfollow from "../follow/itemfollow";
@@ -29,7 +29,8 @@ class Profile extends Component {
             sequence:0,
             totalmoney:0,
             search:'',
-            object:{}
+            object:{},
+            energy:0
         }
     }
 
@@ -43,10 +44,9 @@ class Profile extends Component {
         let sequence = await getSequence(myPublickey)
         let avatar = await getAvatar(myPublickey)
         let money = await getTotalMoney(myPublickey)
-        console.log('money'+money)
-        console.log('avatar:' +avatar)
+        let energy = await getEnergy(myPublickey)
         this.props.savefollowing(following)
-        this.setState({name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar, totalmoney:money })
+        this.setState({energy,name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar, totalmoney:money })
     }
     async componentWillReceiveProps(newProps){
         const myPublickey = newProps.match.params.address;
@@ -57,10 +57,9 @@ class Profile extends Component {
         let sequence = await getSequence(myPublickey)
         let avatar = await getAvatar(myPublickey)
         let money = await getTotalMoney(myPublickey)
-        console.log('money'+money)
-        console.log('avatar:' +avatar)
+        let energy = await getEnergy(myPublickey)
         this.props.savefollowing(following)
-        this.setState({name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar, totalmoney:money })
+        this.setState({energy,name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar, totalmoney:money })
     }
 
     handleClickFollowing(){
@@ -129,21 +128,7 @@ class Profile extends Component {
         catch (e) {
             alert('loi')
         }
-        // let params = {
-        //     object: 'CCB986DD05618567902B8E197B430B745D94312C6C4CFE0305135A2F3B924D78',
-        //     content: {
-        //         type: 1,
-        //         text: 'day la comment'
-        //     }
-        // }
-        // try{
-        //     await makeTransaction('GDBES2U6KZW5FJ7IRPTS4PFBYRTAXDMIADQQY3VLY2QNNXK3Z3NMM3E7', 'interact', params, 'SAJDP4NOQYTFIK3YYUIKOPWG5WZZ37GSVT4AQ6GHFTSLLWSPFMHKCWMW')
-        //     alert('thanh cong')
-        // }
-        // catch (e) {
-        //     console.log(e)
-        //     alert('loi')
-        // }
+
         // let params = {
         //     object: 'CCB986DD05618567902B8E197B430B745D94312C6C4CFE0305135A2F3B924D78',
         //     content: {
@@ -160,20 +145,7 @@ class Profile extends Component {
         //     alert('loi')
         // }
 
-        // let params = {
-        //     key: 'followings',
-        //     value: {
-        //         addresses: ['GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL']
-        //     }
-        // }
-        // try{
-        //     await makeTransaction('GDBES2U6KZW5FJ7IRPTS4PFBYRTAXDMIADQQY3VLY2QNNXK3Z3NMM3E7', 'update_account', params, 'SAJDP4NOQYTFIK3YYUIKOPWG5WZZ37GSVT4AQ6GHFTSLLWSPFMHKCWMW')
-        //     alert('thanh cong')
-        // }
-        // catch (e) {
-        //     console.log(e)
-        //     alert('loi')
-        // }
+
     }
     render() {
 
@@ -203,7 +175,7 @@ class Profile extends Component {
                             </li>
                             <li className="stats-item followers">
                                 <div className="stat-title">energy</div>
-                                <div className="stat-value">{this.props.profile.follower}</div>
+                                <div className="stat-value">{parseFloat(this.state.energy).toFixed(3)}</div>
                             </li>
                             <li className="stats-item followers">
                                 <div className="stat-title">Sequence</div>
