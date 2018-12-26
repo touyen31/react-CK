@@ -4,7 +4,22 @@ import {Button, Form, FormControl, Nav, Navbar, NavItem, Glyphicon, InputGroup, 
 import {withRouter} from 'react-router-dom'
 
 import connect from "react-redux/es/connect/connect";
+import {getAvatar} from "../../redux/action";
+
 class NavBar extends Component {
+    constructor() {
+        super()
+        this.state = {
+            avatar: null
+        }
+    }
+
+    componentDidMount = async () => {
+        let publicKey = this.props.authenticate.publickey
+        let avatar = await getAvatar(publicKey)
+        this.setState({avatar})
+    }
+
     render() {
         return (
             <Navbar fixedTop bg="light" expand="lg" collapseOnSelect>
@@ -24,8 +39,11 @@ class NavBar extends Component {
                         </NavItem>
                     </Nav>
                     <Nav pullRight className="nav-item">
-                        <NavItem onClick={() =>this.props.history.push(`/info/${this.props.authenticate.publickey}`)}>
-                            <Image circle  className="nav-avt" src="https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg"/>
+                        <NavItem onClick={() => this.props.history.push(`/info/${this.props.authenticate.publickey}`)}>
+                            {this.state.avatar ?
+                                <Image circle className="nav-avt" src={this.state.avatar}/>
+                                : <Image circle className="nav-avt" src={"https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"}/>
+                            }
                         </NavItem>
                         <NavItem>
                             <Button bsStyle="info" className="nav-tweet">Tweet</Button>
@@ -46,8 +64,9 @@ class NavBar extends Component {
         );
     }
 }
-const mapStateToProps = (state) => ( {
-    authenticate:state.appReducer.authenticate
+
+const mapStateToProps = (state) => ({
+    authenticate: state.appReducer.authenticate
 })
 
-export default withRouter(connect(mapStateToProps,null)(NavBar));
+export default withRouter(connect(mapStateToProps, null)(NavBar));
