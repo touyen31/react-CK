@@ -46,17 +46,12 @@ class NavBar extends Component {
                             }
                         </NavItem>
                         <NavItem>
-                            <Button bsStyle="info" className="nav-tweet" >Sign out</Button>
+                            <Button bsStyle="info" className="nav-tweet">Sign out</Button>
                         </NavItem>
                     </Nav>
                     <Nav pullRight inline>
                         <Navbar.Form pullRight className="nav-form-input">
-                            <InputGroup>
-                                <FormControl type="text" placeholder="Search" className="nav-input"/>
-                                <InputGroup.Addon className="nav-input">
-                                    <Glyphicon glyph="search"/>
-                                </InputGroup.Addon>
-                            </InputGroup>
+                            <FormControl type="text" placeholder="     Search" className="nav-input"/>
                         </Navbar.Form>
                     </Nav>
                 </Navbar.Collapse>

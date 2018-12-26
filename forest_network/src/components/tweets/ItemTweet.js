@@ -44,7 +44,9 @@ class ItemTweet extends Component {
                 <div className="content" onClick={() => this.setState({showPopup: !this.state.showPopup})}>
                     <div className="stream-item-header">
                         <Link to={'/info/' + item.account}>
-                            <Image alt="avatar" className="imageme" src={this.state.avatar}/>
+                            {this.state.avatar ? <Image alt="avatar" className="imageme" src={this.state.avatar}/>
+                            :   <Image alt="avatar" className="imageme" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"/>
+                            }
                         </Link>
                     </div>
                     <div>
