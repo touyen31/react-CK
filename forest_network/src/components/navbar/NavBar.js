@@ -46,7 +46,7 @@ class NavBar extends Component {
                             }
                         </NavItem>
                         <NavItem>
-                            <Button bsStyle="info" className="nav-tweet">Tweet</Button>
+                            <Button bsStyle="info" className="nav-tweet" >Sign out</Button>
                         </NavItem>
                     </Nav>
                     <Nav pullRight inline>

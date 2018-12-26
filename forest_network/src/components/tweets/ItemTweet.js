@@ -32,7 +32,7 @@ class ItemTweet extends Component {
     render() {
         const {item} =this.props
         return (
-            <Fragment >
+            <Fragment>
                 <div className="content"  onClick={()=> this.setState({showPopup:!this.state.showPopup})}>
                     <Image alt="avatar" className="imageme" src={this.state.avatar}></Image>
                     <div>

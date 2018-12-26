@@ -13,6 +13,7 @@ class DetailTweet extends Component {
         this.state = {
             show : true,
             mycomment:'',
+            myavatar:null,
             avatar:'',
             name:'',
             time:'',
@@ -26,7 +27,8 @@ class DetailTweet extends Component {
         let name = await getmyname(this.props.data.account)
         var time = this.props.data.time
         let comment = await getInteractComment(this.props.data.hash)
-        this.setState({avatar, name, time, datacomment:comment})
+        let myavatar = await getAvatar(this.props.authenticate.publickey)
+        this.setState({avatar, name, time, datacomment:comment, myavatar})
     }
     handlecomment=async ()=>{
         let params = {
@@ -73,9 +75,11 @@ class DetailTweet extends Component {
                     <div className="line"></div>
                     {this.state.datacomment.map((item)=><ItemTweet item={item}/>)}
                     <div className="posttweet">
-                        <img alt="avt" className="imageme" src="https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg"/>
-                        <input className="textareatweet" value={this.state.mycomment} onChange={(e)=>this.setState({mycomment:e.target.value})}></input>
-                        <i className="far fa-share-square" style={{marginTop:30}} onClick={()=>this.handlecomment()}></i>
+                        {this.state.myavatar ? <img alt="avt" className="imageme" src={this.state.myavatar}/> :
+                        <img alt="avt" className="imageme" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"/>
+                        }
+                        <input className="textareatweet" value={this.state.mycomment} onChange={(e) => this.setState({mycomment: e.target.value})}/>
+                        <i className="far fa-share-square" style={{marginTop: 30}} onClick={() => this.handlecomment()}/>
                     </div>
 
                 </Modal.Body>

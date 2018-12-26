@@ -7,16 +7,18 @@ import NewsFeed from "../newsfeed/NewsFeed";
 class Explorer extends Component {
     render() {
         return (
-            <Grid className="home-content">
-                <Col sm={6} md={3}>
-                    <DashboardProfileCard/>
-                </Col>
-                <Col sm={6} md={6}>
-                    <NewsFeed/>
-                </Col>
-                <Col sm={6} md={3}>
-                </Col>
-            </Grid>
+            <div className="home">
+                <Grid className="home-content">
+                    <Col sm={6} md={3}>
+                        <DashboardProfileCard/>
+                    </Col>
+                    <Col sm={6} md={6}>
+                        <NewsFeed/>
+                    </Col>
+                    <Col sm={6} md={3}>
+                    </Col>
+                </Grid>
+            </div>
         )
     }
 }

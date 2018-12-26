@@ -1,8 +1,8 @@
 .tweetsaa{
-    background-color: white;
     border-radius:3px;
     font-size: 16px;
 }
+
 .content{
     display:flex;
     text-align:left;
