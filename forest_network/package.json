@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "base32.js": "^0.1.0",
     "dateformat": "^3.0.3",
+    "moment": "^2.23.0",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",

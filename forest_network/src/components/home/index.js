@@ -14,6 +14,9 @@ class Home extends Component {
                 <NavBar />
                 <Route exact path={'/'} component={Explorer}/>
                 <Route path={'/info'} component={Profile}/>
+                <Route path={'/info/:address'} component={Profile}/>
+
+                {/*<Route path={'/info'} component={Profile}/>*/}
 
             </div>
         );
