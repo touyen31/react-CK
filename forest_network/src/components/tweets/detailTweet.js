@@ -73,6 +73,25 @@ class DetailTweet extends Component {
         }
     }
 
+    handleReaction = async (reaction) => {
+        let params = {
+            object: this.props.data.hash,
+            content: {
+                type: 2,
+                reaction: reaction
+            }
+        }
+        try {
+            console.log(params)
+            await makeTransaction(this.props.authenticate.publickey, 'interact', params, this.props.authenticate.secretKey)
+            alert('thanh cong')
+        }
+        catch (e) {
+            console.log(e)
+            alert('loi')
+        }
+    }
+
     render() {
         return (
             <Modal show={this.props.show} onHide={() => this.props.closePopup()}>
@@ -91,37 +110,37 @@ class DetailTweet extends Component {
                     </div>
                     <div className="line"/>
                     <div className="behavior">
-                        <Link to="#" aria-selected="false">
+                        <Link to="#" aria-selected="false" onClick={()=>this.handleReaction(1)}>
                             <span aria-label={'Những người đã bày tỏ cảm xúc với Thích'}>
                                 <img src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Like.png?resize=30%2C30"/>
                                 <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 1).length}</div>
                             </span>
                         </Link>
-                        <Link to="#" aria-selected="false">
+                        <Link to="#" aria-selected="false" onClick={()=>this.handleReaction(2)}>
                             <span aria-label={'Những người đã bày tỏ cảm xúc với Yêu thích'}>
                                 <img src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Heart.png?resize=30%2C30"/>
                                 <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 2).length}</div>
                             </span>
                         </Link>
-                        <Link to="#" aria-selected="false">
+                        <Link to="#" aria-selected="false" onClick={()=>this.handleReaction(3)}>
                             <span aria-label={'Những người đã bày tỏ cảm xúc với Haha'}>
                                 <img src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Haha.png?resize=30%2C30"/>
                                 <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 3).length}</div>
                             </span>
                         </Link>
-                        <Link to="#" aria-selected="false">
+                        <Link to="#" aria-selected="false" onClick={()=>this.handleReaction(4)}>
                             <span aria-label={'Những người đã bày tỏ cảm xúc với Wow'}>
                                 <img src="https://i1.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Wow.png?resize=30%2C30"/>
                                 <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 4).length}</div>
                             </span>
                         </Link>
-                        <Link to="#" aria-selected="false">
+                        <Link to="#" aria-selected="false" onClick={()=>this.handleReaction(5)}>
                             <span aria-label={'Những người đã bày tỏ cảm xúc với Buồn'}>
                                 <img src="https://i1.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Sad.png?resize=30%2C30"/>
                                 <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 5).length}</div>
                             </span>
                         </Link>
-                        <Link to="#" aria-selected="false">
+                        <Link to="#" aria-selected="false" onClick={()=>this.handleReaction(6)}>
                             <span aria-label={'Những người đã bày tỏ cảm xúc với Giận dữ'}>
                                 <img src="https://i1.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Angry.png?resize=30%2C30"/>
                                 <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 6).length}</div>
