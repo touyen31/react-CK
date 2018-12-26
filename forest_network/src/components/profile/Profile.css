@@ -27,6 +27,15 @@
     width:200px;
     height: 200px;
 }
+.updateavatar{
+    position:absolute;
+    left:100px;
+    top:260px;
+    width:200px;
+    height: 200px;
+    opacity: 0;
+    z-index: 10;
+}
 
 .profile-name{
     margin-left: -10px;

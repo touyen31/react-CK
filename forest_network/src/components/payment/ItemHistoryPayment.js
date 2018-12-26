@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Payment.css'
 import connect from "react-redux/es/connect/connect";
+import moment from 'moment'
 
 class ItemHistoryPayment extends Component {
     render() {
@@ -9,7 +10,7 @@ class ItemHistoryPayment extends Component {
             <div className="contenthistorypayment">
                 <div className="contentinput">
                     <text style={{marginRight:5}}>Time</text>
-                    <text>{data.time}</text>
+                    <text>{moment(data.time).format("DD/MM/YYYY HH:mm:ss")}</text>
                 </div>
                 <div className="contentinput">
                     <text style={{marginRight:5}}>Type payment:</text>

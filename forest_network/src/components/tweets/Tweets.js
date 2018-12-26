@@ -15,8 +15,15 @@ class Tweets extends Component {
         }
     }
     componentDidMount = async ()=>{
-        let avatar = await getAvatar(this.props.account)
-        let status = await getAllMyStatus(this.props.account)
+        const publickey = this.props.account
+        let avatar = await getAvatar(publickey)
+        let status = await getAllMyStatus(publickey)
+        this.setState({avatar, dataStatus:status})
+    }
+    async componentWillReceiveProps(newProps){
+        const publickey = newProps.account
+        let avatar = await getAvatar(publickey)
+        let status = await getAllMyStatus(publickey)
         this.setState({avatar, dataStatus:status})
     }
 
@@ -46,12 +53,13 @@ class Tweets extends Component {
         return (
             <div className="tweetsaa">
                 <div className="textname">Tweets</div>
+                {this.props.account === this.props.authenticate.publickey &&
                 <div className="posttweet">
                     <Image alt="avt" className="imageme" src={this.state.avatar}/>
                     <input className="textareatweet" placeholder="new tweet @@" value={this.state.status} onChange={(e)=>{this.setState({status:e.target.value})}}></input>
                     <Button className="btnfollow" onClick={()=>this.handlePostStatus()}>Post</Button>
                 </div>
-
+                }
                 {this.state.dataStatus.map((item, index)=><ItemTweet key={index} item={item}/>)}
             </div>
         );

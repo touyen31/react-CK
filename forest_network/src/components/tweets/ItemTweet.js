@@ -4,7 +4,7 @@ import DetailTweet from "./detailTweet";
 import {getAvatar, getmyname} from '../../redux/action'
 import {dateFormat } from 'dateformat'
 import {Image} from 'react-bootstrap'
-
+import moment from 'moment'
 class ItemTweet extends Component {
     constructor(){
         super()
@@ -36,7 +36,7 @@ class ItemTweet extends Component {
                         <div className="behavior">
                             <div className="textname">{this.state.name}</div>
                             {/*<div className="text">{item.account}</div>*/}
-                            <div className="text">{this.state.time}</div>
+                            <div className="text">{moment(this.state.time).format("DD/MM/YYYY HH:mm:ss")}</div>
                         </div>
                         <div className="text">{item.params.content.text}</div>
 

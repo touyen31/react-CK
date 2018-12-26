@@ -12,7 +12,9 @@ class Home extends Component {
         return (
             <div>
                 <NavBar />
-                <Route path={'/info'} component={Profile}/>
+                <Route path={'/info/:address'} component={Profile}/>
+
+                {/*<Route path={'/info'} component={Profile}/>*/}
 
                 <Grid className="home-content">
                     <Col sm={6} md={3}>
