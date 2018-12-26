@@ -44,7 +44,7 @@ class ItemTweet extends Component {
                 <div className="content" onClick={() => this.setState({showPopup: !this.state.showPopup})}>
                     <div className="stream-item-header">
                         <Link to={'/info/' + item.account}>
-                            <Image alt="avatar" className="imageme" src={this.state.avatar}></Image>
+                            <Image alt="avatar" className="imageme" src={this.state.avatar}/>
                         </Link>
                     </div>
                     <div>
@@ -59,8 +59,6 @@ class ItemTweet extends Component {
                         <div className="behavior">
                             <i className="far fa-comment"></i>
                             <div className="text">{this.state.comments ? this.state.comments.length : 0}</div>
-                            <i className="fas fa-retweet"></i>
-                            <div className="text">0</div>
                             <i className="far fa-heart"></i>
                             <div className="text">{this.state.reactions ? this.state.reactions.length : 0}</div>
                         </div>

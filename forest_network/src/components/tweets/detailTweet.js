@@ -4,33 +4,56 @@ import ItemTweet from "./ItemTweet";
 import connect from "react-redux/es/connect/connect";
 import {Button, Modal} from "react-bootstrap";
 import makeTransaction from '../../lib/makeTransaction'
-import {getAvatar, getInteractComment, getmyname} from "../../redux/action";
+import {getAvatar, getInteractComment, getInteractReaction, getmyname} from "../../redux/action";
 import moment from "moment";
 import {Image} from 'react-bootstrap'
+import {Link} from "react-router-dom";
+
 class DetailTweet extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            show : true,
-            mycomment:'',
-            myavatar:null,
-            avatar:'',
-            name:'',
-            time:'',
-            datacomment:[]
+            show: true,
+            mycomment: '',
+            myavatar: null,
+            avatar: '',
+            name: '',
+            time: '',
+            comments: [],
+            reactions: []
+            /*
+            noreacts: [],
+            likes: [],
+            loves: [],
+            hahas: [],
+            wows: [],
+            sads: [],
+            angrys: []
+            */
         }
 
     }
 
-    componentDidMount = async ()=>{
+    componentDidMount = async () => {
         let avatar = await getAvatar(this.props.data.account)
         let name = await getmyname(this.props.data.account)
         var time = this.props.data.time
-        let comment = await getInteractComment(this.props.data.hash)
+        let comments = await getInteractComment(this.props.data.hash)
+        let reactions = await getInteractReaction(this.props.data.hash)
         let myavatar = await getAvatar(this.props.authenticate.publickey)
-        this.setState({avatar, name, time, datacomment:comment, myavatar})
+        /*
+        let noreacts = this.state.reactions.filter((react) => react.params.content.reaction === 0)
+        let likes = this.state.reactions.filter((react) => react.params.content.reaction === 1)
+        let loves = this.state.reactions.filter((react) => react.params.content.reaction === 2)
+        let hahas = this.state.reactions.filter((react) => react.params.content.reaction === 3)
+        let wows = this.state.reactions.filter((react) => react.params.content.reaction === 4)
+        let sads = this.state.reactions.filter((react) => react.params.content.reaction === 5)
+        let angrys = this.state.reactions.filter((react) => react.params.content.reaction === 6)
+        this.setState({avatar, name, time, myavatar, comments, reactions, noreacts, likes, loves, hahas, wows, sads, angrys})
+        */
+        this.setState({avatar, name, time, myavatar, comments, reactions})
     }
-    handlecomment=async ()=>{
+    handlecomment = async () => {
         let params = {
             object: this.props.data.hash,
             content: {
@@ -38,11 +61,11 @@ class DetailTweet extends Component {
                 text: this.state.mycomment
             }
         }
-        try{
+        try {
             console.log(params)
-            await makeTransaction(this.props.authenticate.publickey, 'interact', params,this.props.authenticate.secretkey)
+            await makeTransaction(this.props.authenticate.publickey, 'interact', params, this.props.authenticate.secretkey)
             alert('thanh cong')
-            this.setState({mycomment:''})
+            this.setState({mycomment: ''})
         }
         catch (e) {
             console.log(e)
@@ -52,34 +75,71 @@ class DetailTweet extends Component {
 
     render() {
         return (
-            <Modal show={this.props.show} onHide={()=> this.props.closePopup()}>
+            <Modal show={this.props.show} onHide={() => this.props.closePopup()}>
                 <Modal.Body>
                     <div className="information">
                         <Image alt="avt" className="imageme" src={this.state.avatar}/>
                         <div>
                             <div className="user">{this.state.name}</div>
-                            <div className="account">@banhcom</div>
+                            <div className="account">@{this.props.data.account}</div>
 
                         </div>
                     </div>
                     <div className="contaner">
-                        <div style={{marginLeft:20}}>{this.props.data.params.content.text}</div>
-                        <div style={{marginLeft:20}}>{moment(this.state.time).format("DD/MM/YYYY HH:mm:ss")}</div>
+                        <div style={{marginLeft: 20}}>{this.props.data.params.content.text}</div>
+                        <div style={{marginLeft: 20}}>{moment(this.state.time).format("DD/MM/YYYY HH:mm:ss")}</div>
                     </div>
-                    <div className="line"></div>
+                    <div className="line"/>
                     <div className="behavior">
-                        <i className="far fa-comment"></i>
-                        <i className="fas fa-retweet"></i>
-                        <i className="far fa-heart"></i>
+                        <Link to="#" aria-selected="false">
+                            <span aria-label={'Những người đã bày tỏ cảm xúc với Thích'}>
+                                <img src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Like.png?resize=30%2C30"/>
+                                <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 1).length}</div>
+                            </span>
+                        </Link>
+                        <Link to="#" aria-selected="false">
+                            <span aria-label={'Những người đã bày tỏ cảm xúc với Yêu thích'}>
+                                <img src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Heart.png?resize=30%2C30"/>
+                                <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 2).length}</div>
+                            </span>
+                        </Link>
+                        <Link to="#" aria-selected="false">
+                            <span aria-label={'Những người đã bày tỏ cảm xúc với Haha'}>
+                                <img src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Haha.png?resize=30%2C30"/>
+                                <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 3).length}</div>
+                            </span>
+                        </Link>
+                        <Link to="#" aria-selected="false">
+                            <span aria-label={'Những người đã bày tỏ cảm xúc với Wow'}>
+                                <img src="https://i1.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Wow.png?resize=30%2C30"/>
+                                <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 4).length}</div>
+                            </span>
+                        </Link>
+                        <Link to="#" aria-selected="false">
+                            <span aria-label={'Những người đã bày tỏ cảm xúc với Buồn'}>
+                                <img src="https://i1.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Sad.png?resize=30%2C30"/>
+                                <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 5).length}</div>
+                            </span>
+                        </Link>
+                        <Link to="#" aria-selected="false">
+                            <span aria-label={'Những người đã bày tỏ cảm xúc với Giận dữ'}>
+                                <img src="https://i1.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Facebook-Angry.png?resize=30%2C30"/>
+                                <div className="text">{this.state.reactions.filter((react) => react.params.content.reaction === 6).length}</div>
+                            </span>
+                        </Link>
+
+                        <div className="text count-comment" >{this.state.comments ? this.state.comments.length : 0} bình luận</div>
                     </div>
-                    <div className="line"></div>
-                    {this.state.datacomment.map((item)=><ItemTweet item={item}/>)}
+                    <div className="line"/>
+                    {this.state.comments.map((item) => <ItemTweet class="line" item={item}/>)}
                     <div className="posttweet">
                         {this.state.myavatar ? <img alt="avt" className="imageme" src={this.state.myavatar}/> :
-                        <img alt="avt" className="imageme" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"/>
+                            <img alt="avt" className="imageme" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"/>
                         }
-                        <input className="textareatweet" value={this.state.mycomment} onChange={(e) => this.setState({mycomment: e.target.value})}/>
-                        <i className="far fa-share-square" style={{marginTop: 30}} onClick={() => this.handlecomment()}/>
+                        <input className="textareatweet" value={this.state.mycomment}
+                               onChange={(e) => this.setState({mycomment: e.target.value})}/>
+                        <i className="far fa-share-square" style={{marginTop: 30}}
+                           onClick={() => this.handlecomment()}/>
                     </div>
 
                 </Modal.Body>
@@ -87,11 +147,10 @@ class DetailTweet extends Component {
         );
     }
 }
-const mapStateToProps = (state) => ( {
-    comment:state.appReducer.comment,
-    authenticate:state.appReducer.authenticate
-})
-const mapDispathToProps = (dispatch)=>({
 
+const mapStateToProps = (state) => ({
+    comment: state.appReducer.comment,
+    authenticate: state.appReducer.authenticate
 })
-export default connect(mapStateToProps,mapDispathToProps) (DetailTweet);
+const mapDispathToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispathToProps)(DetailTweet);

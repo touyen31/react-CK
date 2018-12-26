@@ -157,7 +157,7 @@ export const getInteractReaction = async (hash)=> {
     const url ='http://localhost:5000/account/reaction/'+hash
     try {
         let res = await axios.get(url);
-        return res.data.comment
+        return res.data.reaction
     } catch (e) {
         return[]
     }
