@@ -2,6 +2,7 @@ import {Keypair} from 'stellar-base'
 import axios from 'axios'
 export const UPDATEPROFILE = 'UPDATEPROFILE'
 export const AUTHENTICATE = 'AUTHENTICATE'
+export const SAVEFOLLOWING = 'SAVEFOLLOWING'
 export const GETMYNAME = 'GETMYNAME'
 
 // export const getmyname = (publickey)=> dispatch => {
@@ -18,6 +19,12 @@ export const GETMYNAME = 'GETMYNAME'
 //         })
 //
 // }
+export const savefollowing = (following)=>{
+    return{
+        type:SAVEFOLLOWING,
+        data:following
+    }
+}
 
 export const updateprofile = (profile)=>{
     return {

@@ -3,7 +3,7 @@ import './Profile.css'
 import connect from "react-redux/es/connect/connect";
 import Follow from "../follow/Follow";
 import Tweets from "../tweets/Tweets";
-import {GETMYNAME} from '../../redux/action'
+import {savefollowing} from '../../redux/action'
 import {Route}from'react-router-dom'
 import makeTransaction from '../../lib/makeTransaction'
 import {Button, Col, FormControl, Glyphicon, Grid, Image} from "react-bootstrap";
@@ -12,6 +12,7 @@ import {getSequence, getmyname, getAllMyStatus, getFollower, getFollowing, getAv
 
 import axios from 'axios'
 import Payment from "../payment/Payment";
+import Itemfollow from "../follow/itemfollow";
 
 
 class Profile extends Component {
@@ -27,7 +28,9 @@ class Profile extends Component {
             dataFollowing:[],
             dataFollower:[],
             sequence:0,
-            totalmoney:0
+            totalmoney:0,
+            search:'',
+            object:{}
         }
     }
 
@@ -43,6 +46,7 @@ class Profile extends Component {
         let money = await getTotalMoney(myPublickey)
         console.log('money'+money)
         console.log('avatar:' +avatar)
+        this.props.savefollowing(following)
         this.setState({name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar, totalmoney:money })
     }
 
@@ -89,6 +93,15 @@ class Profile extends Component {
             }
             reader.readAsDataURL(event.target.files[0])
         }
+    }
+    handleSearch = async ()=>{
+        let name = await getmyname(this.state.search)
+        let avatar = await getAvatar(this.state.search)
+        let ob={}
+        ob.name = name
+        ob.avatar = avatar
+        this.setState({object:ob})
+        console.log(this.state.object)
     }
     uphinh = async () => {
         let flag = 'data:image/jpeg;base64,';
@@ -199,6 +212,16 @@ class Profile extends Component {
                                     }
                                 </div>
                                 <div className="profile-username">{this.props.profile.account}</div>
+                                <div className="contentfollow">
+                                    <div className="findfollow">
+                                        <input placeholder="find publickey" style={{width: 300,backgroundColor: "gainsboro"}} value={this.state.search}
+                                               onChange={(e)=>this.setState({search:e.target.value})}/>
+                                        <i className="fas fa-search" onClick={()=>this.handleSearch()}></i>
+
+                                    </div>
+                                    {Object.getOwnPropertyNames(this.state.object).length !=0 ?
+                                        <Itemfollow  item={this.state.search}/> :<text>no data</text>}
+                                </div>
                             </div>
                         </Col>
                         <Col sm={6} md={6} className="profile-middle">
@@ -230,7 +253,8 @@ const mapStateToProps = (state) => ( {
 const mapDispathToProps = (dispatch)=>({
 
     // updateprofile: (profile)=>(dispatch(updateprofile(profile)))
-    getmyname:(publickey) => dispatch(getmyname(publickey))
+    getmyname:(publickey) => dispatch(getmyname(publickey)),
+    savefollowing:(following)=>dispatch(savefollowing(following))
 
 })
 export default connect(mapStateToProps,mapDispathToProps)(Profile);

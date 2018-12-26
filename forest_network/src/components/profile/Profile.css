@@ -70,3 +70,16 @@ li.stats-item {
     font-size:19px;
     color:blue;
 }
+
+.contentfollow{
+    background-color: white;
+    width: 350px;
+    height: 500px;
+    margin-left: -100px;
+}
+.findfollow{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}

@@ -7,7 +7,7 @@ import {authenticate} from '../../redux/action'
 
 class Login extends Component {
     state = {
-        secret: ''
+        secret: 'SAJDP4NOQYTFIK3YYUIKOPWG5WZZ37GSVT4AQ6GHFTSLLWSPFMHKCWMW'
     }
     setValue = (e) => this.setState({secret: e.target.value})
     render() {
@@ -16,7 +16,7 @@ class Login extends Component {
                 <div className = "form-box" >
                     <div className = "head" > Forest Network </div>
                         <form action="#" id="login-form">
-                            <input className="form-control" placeholder="Secret Key" onChange={this.setValue}/>
+                            <input className="form-control" placeholder="Secret Key" value={this.state.secret} onChange={this.setValue}/>
                             <button className="btn-login" onClick={() => this.props.authenticate(this.state.secret)}>LOGIN</button>
                             <p className="text-p">1512649 - 1512658 - ĐACK Công nghệ mới</p>
                         </form>
