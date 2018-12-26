@@ -83,12 +83,15 @@ class DetailTweet extends Component {
         }
         try {
             console.log(params)
-            await makeTransaction(this.props.authenticate.publickey, 'interact', params, this.props.authenticate.secretKey)
-            alert('thanh cong')
+            await makeTransaction(this.props.authenticate.publickey, 'interact', params, this.props.authenticate.secretkey)
+            alert('Thành công')
+            let reactions = await getInteractReaction(this.props.data.hash)
+            console.log(reactions)
+            this.setState({reactions:reactions})
         }
         catch (e) {
             console.log(e)
-            alert('loi')
+            alert('Lỗi')
         }
     }
 
