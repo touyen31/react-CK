@@ -153,6 +153,16 @@ export const getInteractComment = async (hash)=>{
     }
 }
 
+export const getInteractReaction = async (hash)=> {
+    const url ='http://localhost:5000/account/reaction/'+hash
+    try {
+        let res = await axios.get(url);
+        return res.data.comment
+    } catch (e) {
+        return[]
+    }
+}
+
 export const getEnergy = async (publickey)=>{
     const url ='http://localhost:5000/account/'+publickey+'/energy'
     try {

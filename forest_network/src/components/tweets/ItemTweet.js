@@ -1,44 +1,56 @@
 import React, {Component, Fragment} from 'react';
 import './Tweets.css'
+import './ItemTweet.css'
 import DetailTweet from "./detailTweet";
 import {getAvatar, getmyname} from '../../redux/action'
-import {dateFormat } from 'dateformat'
+import {dateFormat} from 'dateformat'
 import {Image} from 'react-bootstrap'
 import moment from 'moment'
+import {Link} from "react-router-dom";
+
 class ItemTweet extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             showPopup: false,
-            avatar:null,
-            name:'',
-            time:null
+            avatar: null,
+            name: '',
+            time: null,
+            comments: null,
+            reactions: null
         }
     }
 
-    componentDidMount = async ()=>{
+    componentDidMount = async () => {
         console.log(this.props.item.operation)
         let avatar = await getAvatar(this.props.item.account)
         let name = await getmyname(this.props.item.account)
         var time = this.props.item.time
+
         // time = dateFormat(time, "dddd, mm, yyyy, h:MM:ss TT")
         this.setState({avatar, name, time})
     }
 
 
-    closePopup=()=>{
+    closePopup = () => {
         this.setState({showPopup: false})
     }
+
     render() {
-        const {item} =this.props
+        const {item} = this.props
         return (
             <Fragment>
-                <div className="content"  onClick={()=> this.setState({showPopup:!this.state.showPopup})}>
-                    <Image alt="avatar" className="imageme" src={this.state.avatar}></Image>
+                <div className="content" onClick={() => this.setState({showPopup: !this.state.showPopup})}>
+                    <div className="stream-item-header">
+                        <Link to={'/info/' + item.account}>
+                            <Image alt="avatar" className="imageme" src={this.state.avatar}></Image>
+                        </Link>
+                    </div>
                     <div>
                         <div className="behavior">
-                            <div className="textname">{this.state.name}</div>
-                            {/*<div className="text">{item.account}</div>*/}
+                            <Link to={'/info/' + item.account}>
+                                <div className="textname">{this.state.name}</div>
+                            </Link>
                             <div className="text">{moment(this.state.time).format("DD/MM/YYYY HH:mm:ss")}</div>
                         </div>
                         <div className="text">{item.params.content.text}</div>
@@ -55,10 +67,11 @@ class ItemTweet extends Component {
                     <div className="line"></div>
                 </div>
                 {
-                     <DetailTweet show={this.state.showPopup} closePopup={this.closePopup} data={this.props.item} />
+                    <DetailTweet show={this.state.showPopup} closePopup={this.closePopup} data={this.props.item}/>
                 }
             </Fragment>
         );
     }
 }
+
 export default ItemTweet;
