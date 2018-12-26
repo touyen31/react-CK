@@ -35,3 +35,14 @@
 .count-comment {
     alignment: right;
 }
+
+.account {
+    font-size: 12px;
+    padding-right: 5px;
+    color: #66757f;
+    width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
