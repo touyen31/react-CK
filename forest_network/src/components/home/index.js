@@ -3,8 +3,8 @@ import NavBar from '../navbar/NavBar'
 import Profile from '../profile/Profile'
 import {Route} from 'react-router-dom'
 import './home.css'
-import {Col, Grid} from "react-bootstrap";
-import DashboardProfileCard from "./DashboardProfileCard";
+import Explorer from "../explorer/Explorer";
+
 
 class Home extends Component {
 
@@ -12,18 +12,9 @@ class Home extends Component {
         return (
             <div>
                 <NavBar />
+                <Route exact path={'/'} component={Explorer}/>
                 <Route path={'/info'} component={Profile}/>
 
-                <Grid className="home-content">
-                    <Col sm={6} md={3}>
-
-                    </Col>
-                    <Col sm={6} md={6}>
-
-                    </Col>
-                    <Col sm={6} md={3}>
-                    </Col>
-                </Grid>
             </div>
         );
     }

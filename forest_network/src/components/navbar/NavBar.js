@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import "./NavBar.css"
 import {Button, Form, FormControl, Nav, Navbar, NavItem, Glyphicon, InputGroup, Image} from "react-bootstrap";
 import {withRouter} from 'react-router-dom'
+
 class NavBar extends Component {
     render() {
         return (
