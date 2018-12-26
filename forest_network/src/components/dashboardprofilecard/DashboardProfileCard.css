@@ -101,6 +101,10 @@
     font-size: 12px;
     padding-right: 5px;
     color: #66757f;
+    width: 185px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .u-linkComplex, .u-linkComplex:hover, .u-linkComplex:focus, .u-linkComplex:active {

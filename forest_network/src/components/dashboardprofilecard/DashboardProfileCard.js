@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './DashboardProfileCard.css'
 import {Image} from "react-bootstrap";
-
+import {getAllMyStatus, getAvatar, getFollower, getFollowing, getinfo, getmyname} from "../../redux/action";
+import connect from "react-redux/es/connect/connect";
 
 class DashboardProfileCard extends Component {
     constructor() {
@@ -9,9 +10,22 @@ class DashboardProfileCard extends Component {
         this.state = {
             name:'Name',
             username:'Username',
+            avatar: null,
             countTweets: 0,
             countFollowing: 0
         }
+    }
+
+    componentDidMount = async ()=> {
+        const publicKey = this.props.authenticate.publickey
+        let name = await getmyname(publicKey)
+        let username = publicKey
+        let avatar = await getAvatar(publicKey)
+        let tweets = await getAllMyStatus(publicKey)
+        let following = await getFollower(publicKey)
+        let countTweets = tweets.length
+        let countFollowing = following.length
+        this.setState({name, username, avatar, countTweets, countFollowing})
     }
 
     render() {
@@ -24,7 +38,10 @@ class DashboardProfileCard extends Component {
                 <div className="DashboardProfileCard-content">
                     <div className="DashboardProfileCard-avatarContainer">
                         <a className="DashboardProfileCard-avatarLink u-inlineBlock" href="#" tabIndex="-1" aria-hidden="true">
-                            <Image circle thumbnail src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"/>
+                            {this.state.avatar ?
+                                <Image circle thumbnail src={this.state.avatar}/>
+                                : <Image circle thumbnail src="https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png"/>
+                            }
                         </a>
                     </div>
                     <div className="DashboardProfileCard-userFields account-group">
@@ -63,4 +80,8 @@ class DashboardProfileCard extends Component {
     }
 }
 
-export default DashboardProfileCard;
+const mapStateToProps = (state) => ({
+    authenticate:state.appReducer.authenticate
+})
+
+export default connect(mapStateToProps)(DashboardProfileCard);
