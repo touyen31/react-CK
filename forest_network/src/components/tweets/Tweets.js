@@ -50,6 +50,7 @@ class Tweets extends Component {
     }
     render() {
         // const {data} = this.props
+        console.log(this.state)
         return (
             <div className="tweetsaa">
                 <div className="textname">Tweets</div>

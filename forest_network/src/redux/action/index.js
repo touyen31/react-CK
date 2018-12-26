@@ -60,13 +60,14 @@ export const getmyname  = async (publickey)=>{
 
 export const getAllMyStatus = async (publickey)=>{
     const url ='http://localhost:5000/account/'+publickey+'/status'
-    return await axios.get(url)
-        .then(res=>{
-            return res.data.data
-        })
-        .catch(e=>{
-            alert(e.message)
-        })
+    try {
+        let res = await axios.get(url);
+        console.log(res)
+        return res.data.data
+    } catch (e) {
+        return[]
+    }
+
 }
 
 export const getFollowing =async (publickey)=>{
