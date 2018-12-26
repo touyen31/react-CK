@@ -25,12 +25,14 @@ class ItemTweet extends Component {
     }
 
 
-
+    closePopup=()=>{
+        this.setState({showPopup: false})
+    }
     render() {
         const {item} =this.props
         return (
             <Fragment >
-                <div className="content"  onClick={()=> this.setState({showPopup:true})}>
+                <div className="content"  onClick={()=> this.setState({showPopup:!this.state.showPopup})}>
                     <Image alt="avatar" className="imageme" src={this.state.avatar}></Image>
                     <div>
                         <div className="behavior">
@@ -52,7 +54,7 @@ class ItemTweet extends Component {
                     <div className="line"></div>
                 </div>
                 {
-                    this.state.showPopup && <DetailTweet/>
+                     <DetailTweet show={this.state.showPopup} closePopup={this.closePopup} data={this.props.item} />
                 }
             </Fragment>
         );
