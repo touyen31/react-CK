@@ -17,6 +17,7 @@ class ItemTweet extends Component {
     }
 
     componentDidMount = async ()=>{
+        console.log(this.props.item.operation)
         let avatar = await getAvatar(this.props.item.account)
         let name = await getmyname(this.props.item.account)
         var time = this.props.item.time

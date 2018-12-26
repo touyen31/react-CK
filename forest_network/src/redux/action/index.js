@@ -130,3 +130,15 @@ export const getTotalMoney = async (publickey)=>{
             alert(e.message)
         })
 }
+
+export const getAllStatusRelationship = async (publickey) => {
+    const url = 'http://localhost:5000/account/'+publickey+'/all'
+    return await axios.get(url)
+        .then(res=>{
+            console.log(res.data.data)
+            return res.data.data
+        })
+        .catch(e=>{
+            alert(e.message)
+        })
+}
