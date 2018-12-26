@@ -2,7 +2,11 @@
     font-family:"Times New Roman";
     border-radius:3px;
     font-size: 16px;
-    display:flex;
+    display:grid;
+    width: 60%;
+    grid-template-columns: 300px 300px 300px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 }
 .follow .title{
     font-size: 19px;

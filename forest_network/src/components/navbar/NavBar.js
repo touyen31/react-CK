@@ -3,6 +3,7 @@ import "./NavBar.css"
 import {Button, Form, FormControl, Nav, Navbar, NavItem, Glyphicon, InputGroup, Image} from "react-bootstrap";
 import {withRouter} from 'react-router-dom'
 
+import connect from "react-redux/es/connect/connect";
 class NavBar extends Component {
     render() {
         return (
@@ -23,7 +24,7 @@ class NavBar extends Component {
                         </NavItem>
                     </Nav>
                     <Nav pullRight className="nav-item">
-                        <NavItem onClick={() =>this.props.history.push('/info')}>
+                        <NavItem onClick={() =>this.props.history.push(`/info/${this.props.authenticate.publickey}`)}>
                             <Image circle  className="nav-avt" src="https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg"/>
                         </NavItem>
                         <NavItem>
@@ -45,5 +46,8 @@ class NavBar extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ( {
+    authenticate:state.appReducer.authenticate
+})
 
-export default withRouter(NavBar);
+export default withRouter(connect(mapStateToProps,null)(NavBar));

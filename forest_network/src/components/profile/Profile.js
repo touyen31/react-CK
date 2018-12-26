@@ -10,7 +10,6 @@ import {Button, Col, FormControl, Glyphicon, Grid, Image} from "react-bootstrap"
 
 import {getSequence, getmyname, getAllMyStatus, getFollower, getFollowing, getAvatar, getTotalMoney}from '../../redux/action'
 
-import axios from 'axios'
 import Payment from "../payment/Payment";
 import Itemfollow from "../follow/itemfollow";
 
@@ -36,7 +35,21 @@ class Profile extends Component {
 
 
     componentDidMount = async ()=>{
-        const myPublickey = this.props.authenticate.publickey
+        const myPublickey = this.props.match.params.address;
+        let name =await getmyname(myPublickey)
+        let status = await getAllMyStatus(myPublickey)
+        let following = await getFollowing(myPublickey)
+        let follower = await getFollower(myPublickey)
+        let sequence = await getSequence(myPublickey)
+        let avatar = await getAvatar(myPublickey)
+        let money = await getTotalMoney(myPublickey)
+        console.log('money'+money)
+        console.log('avatar:' +avatar)
+        this.props.savefollowing(following)
+        this.setState({name,sequence, dataStatus:status, dataFollowing:following, dataFollower:follower, file:avatar, totalmoney:money })
+    }
+    async componentWillReceiveProps(newProps){
+        const myPublickey = newProps.match.params.address;
         let name =await getmyname(myPublickey)
         let status = await getAllMyStatus(myPublickey)
         let following = await getFollowing(myPublickey)
@@ -51,19 +64,19 @@ class Profile extends Component {
     }
 
     handleClickFollowing(){
-        this.props.history.push('/info/following')
+        this.props.history.push(`/info/${this.props.match.params.address}/following`)
     }
     handleClickFollower(){
-        this.props.history.push('/info/follower')
+        this.props.history.push(`/info/${this.props.match.params.address}/follower`)
     }
     handleClickTweets(){
-        this.props.history.push('/info/')
+        this.props.history.push(`/info/${this.props.match.params.address}`)
     }
     handleClickEdit(){
         this.setState({checkEditName:!this.state.checkEditName})
     }
     handleClickPayment(){
-        this.props.history.push('/info/payment')
+        this.props.history.push(`/info/${this.props.match.params.address}/payment`)
     }
     handleUpdateProfile(e){
         console.log(e.target.value)
@@ -168,8 +181,10 @@ class Profile extends Component {
             <div >
                 <div className="profile template">
                     <Image circle thumbnail alt="avt" className="profile-avatar" src={this.state.file}/>
-                    <input type='file' onChange={this.handleFileChange} style={{position: 'absolute', top: 500, left: 100}} />
-                    {this.state.checkUpdateAvatar && <button style={{position: 'absolute', top: 550, left: 100}} onClick={() => this.uphinh()}>Luu</button>}
+                    {this.props.match.params.address===this.props.authenticate.publickey &&
+                    <input type='file' onChange={this.handleFileChange} className="updateavatar" />
+                    }
+                    {this.state.checkUpdateAvatar && <button style={{position: 'absolute', top: 400, left: 150}} onClick={() => this.uphinh()}>Luu</button>}
                     <Image alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
 
                     <div className="profile-navbar">
@@ -194,10 +209,13 @@ class Profile extends Component {
                                 <div className="stat-title">Sequence</div>
                                 <div className="stat-value">{this.state.sequence}</div>
                             </li>
+                            {this.props.match.params.address === this.props.authenticate.publickey &&
                             <li className="stats-item followers" onClick={()=>this.handleClickPayment()}>
                                 <div className="stat-title">Payment</div>
                                 <div className="stat-value">{this.state.totalmoney}</div>
                             </li>
+                            }
+
                         </ul>
                     </div>
                     <Grid className="profile-content">
@@ -212,6 +230,7 @@ class Profile extends Component {
                                     }
                                 </div>
                                 <div className="profile-username">{this.props.profile.account}</div>
+                                {this.props.match.params.address===this.props.authenticate.publickey &&
                                 <div className="contentfollow">
                                     <div className="findfollow">
                                         <input placeholder="find publickey" style={{width: 300,backgroundColor: "gainsboro"}} value={this.state.search}
@@ -220,15 +239,16 @@ class Profile extends Component {
 
                                     </div>
                                     {Object.getOwnPropertyNames(this.state.object).length !=0 ?
-                                        <Itemfollow  item={this.state.search}/> :<text>no data</text>}
+                                        <Itemfollow  item={this.state.search} type={2}/> :<text>no data</text>}
                                 </div>
+                                }
                             </div>
                         </Col>
                         <Col sm={6} md={6} className="profile-middle">
-                            <Route exact path={'/info/following'} render={() =><Follow title={'Danh sách following'} data={this.state.dataFollowing}/>}/>
-                            <Route  exact path={'/info/follower'} render={() =><Follow title ={'Danh sách follower'}  data={this.state.dataFollower}/>}/>
-                            <Route exact path={'/info/'} render={() => <Tweets data={this.state.dataStatus} account={this.props.authenticate.publickey}/>}/>
-                            <Route  exact path={'/info/payment'} render={() =><Payment/>}/>
+                            <Route exact  path={'/info/:address/following'} render={() =><Follow type={1} title={'Danh sách following'} data={this.state.dataFollowing} account={this.props.match.params.address}/>}/>
+                            <Route exact path={'/info/:address/follower'} render={() =><Follow type={2} title ={'Danh sách follower'}  data={this.state.dataFollower} account={this.props.match.params.address}/>}/>
+                            <Route exact path={'/info/:address/'} render={() => <Tweets data={this.state.dataStatus} account={this.props.match.params.address}/>}/>
+                            <Route exact exact path={'/info/:address/payment'} render={() =><Payment/>}/>
 
                         </Col>
                         <Col sm={6} md={3}>
