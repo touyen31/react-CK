@@ -16,14 +16,20 @@
     margin-left: 10px;
 }
 .textname{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: black;
 }
 .text{
     margin-left: 10px;
-    color: gray;
     margin-right: 20px;
+    margin-bottom: 30px;
+    text-align: start;
+}
+
+.line{
+    height: 1px;
+    background-color: #66757f;
 }
 .imageme{
     border-radius: 100%;
@@ -40,8 +46,11 @@
 }
 .textareatweet{
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 15px;
+    border-width: 0.5px;
+    padding: 5px;
+    width: 400px;
 }
 .popup{
     width: 100%;
@@ -54,4 +63,10 @@
     left: 50%;
     z-index: 10;
     box-shadow: 0 0 2px 8px
+}
+.btnfollow{
+    font-weight: bolder;
+    height: 30px;
+    float: right;
+    margin-top: 20px;
 }

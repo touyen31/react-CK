@@ -42,13 +42,14 @@ class ItemTweet extends Component {
 
                         <div className="behavior">
                             <i className="far fa-comment"></i>
-                            <div className="text">2</div>
+                            <div className="text">0</div>
                             <i className="fas fa-retweet"></i>
-                            <div className="text">2</div>
+                            <div className="text">0</div>
                             <i className="far fa-heart"></i>
-                            <div className="text">3</div>
+                            <div className="text">0</div>
                         </div>
                     </div>
+                    <div className="line"></div>
                 </div>
                 {
                     this.state.showPopup && <DetailTweet/>

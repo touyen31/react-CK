@@ -203,7 +203,7 @@ class Profile extends Component {
                         </Col>
                         <Col sm={6} md={6} className="profile-middle">
                             <Route exact path={'/info/following'} render={() =><Follow title={'Danh sách following'} data={this.state.dataFollowing}/>}/>
-                            <Route  exact path={'/info/follower'} render={() =><Follow title ={'Danh sách follower'}  data={this.state.dataFollowing}/>}/>
+                            <Route  exact path={'/info/follower'} render={() =><Follow title ={'Danh sách follower'}  data={this.state.dataFollower}/>}/>
                             <Route exact path={'/info/'} render={() => <Tweets data={this.state.dataStatus} account={this.props.authenticate.publickey}/>}/>
                             <Route  exact path={'/info/payment'} render={() =><Payment/>}/>
 

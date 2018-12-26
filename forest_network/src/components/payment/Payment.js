@@ -2,15 +2,23 @@ import React, {Component} from 'react';
 import makeTransaction from '../../lib/makeTransaction'
 import './Payment.css'
 import connect from "react-redux/es/connect/connect";
-import {getAllMyStatus} from "../../redux/action";
+import  {getinfo} from '../../redux/action'
+import ItemHistoryPayment from "./ItemHistoryPayment";
 
 class Payment extends Component {
     constructor(){
         super()
         this.state={
             amount:'',
-            account:''
+            account:'',
+            dataStatus:[],
+            datapayment:[]
         }
+    }
+    componentDidMount = async ()=>{
+        let data= await getinfo(this.props.authenticate.publickey)
+        this.setState({dataStatus: data})
+        this.handlefindpayment()
     }
     handlePostPayment = async ()=>{
         console.log('amount: '+this.state.amount )
@@ -21,6 +29,7 @@ class Payment extends Component {
         }
         try{
             await makeTransaction(this.props.authenticate.publickey, 'payment', params,this.props.authenticate.secretkey)
+            this.setState({amount:'', account:''})
             alert('thanh cong')
         }
         catch (e) {
@@ -28,14 +37,30 @@ class Payment extends Component {
             alert('loi')
         }
     }
+    handlefindpayment(){
+        console.log(this.state.dataStatus)
+        this.state.dataStatus.map((item)=>(
+            item.operation == 'payment' && this.setState({datapayment:[...this.state.datapayment, item]})
+        ))
+        console.log(this.state.datapayment)
+    }
 
 
     render() {
         return (
-            <div className="content">
-                <input placeholder="account" value={this.state.account}  onChange={(e)=>this.setState({account:e.target.value})}/>
-                <input placeholder="amount" value={this.state.amount} onChange={(e)=>this.setState({amount:e.target.value})}/>
-                <button onClick={()=>this.handlePostPayment()}>Chuyển</button>
+            <div className="contentpayment">
+                <div className="textname" style={{marginBottom:10}}>payment</div>
+                <div className="contentinput">
+                    <text style={{marginRight:5}}>Account payment:</text>
+                    <input style={{height:40, width:400}} placeholder="account" value={this.state.account}  onChange={(e)=>this.setState({account:e.target.value})}/>
+                </div>
+                <div className="contentinput">
+                    <text style={{marginRight:5}}>Amount:</text>
+                    <input style={{height:40, width:400}} placeholder="amount" value={this.state.amount} onChange={(e)=>this.setState({amount:e.target.value})}/>
+                </div>
+                <button className="btnconfirm" onClick={()=>this.handlePostPayment()}>Chuyển</button>
+                <div className="textname" style={{marginTop:10, marginBottom:10}}>historypayment</div>
+                {this.state.datapayment.map((item)=><ItemHistoryPayment data={item}/>)}
             </div>
         );
     }

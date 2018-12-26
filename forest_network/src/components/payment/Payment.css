@@ -1,3 +1,30 @@
-.content{
+.contentpayment{
     background-color: white;
+}
+.contentinput{
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.btnconfirm{
+    background-color: white;
+    border-width: thin;
+    border-color: #66757f;
+}
+.textname{
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.contenthistorypayment{
+    background-color: white;
+    border-width: 1px;
+}
+.linepayment{
+    height: 1px;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #282c34;
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ItemTweet from "./ItemTweet";
-import {Image} from "react-bootstrap";
+import {Button, Image} from "react-bootstrap";
 import  {getAvatar, getAllMyStatus} from '../../redux/action'
 import makeTransaction from '../../lib/makeTransaction'
 import connect from "react-redux/es/connect/connect";
@@ -48,9 +48,10 @@ class Tweets extends Component {
                 <div className="textname">Tweets</div>
                 <div className="posttweet">
                     <Image alt="avt" className="imageme" src={this.state.avatar}/>
-                    <input className="textareatweet" value={this.state.status} onChange={(e)=>{this.setState({status:e.target.value})}}></input>
-                    <button onClick={()=>this.handlePostStatus()} style={{width:70, height:40, margin:15}}>post</button>
+                    <input className="textareatweet" placeholder="new tweet @@" value={this.state.status} onChange={(e)=>{this.setState({status:e.target.value})}}></input>
+                    <Button className="btnfollow" onClick={()=>this.handlePostStatus()}>Post</Button>
                 </div>
+
                 {this.state.dataStatus.map((item, index)=><ItemTweet key={index} item={item}/>)}
             </div>
         );
