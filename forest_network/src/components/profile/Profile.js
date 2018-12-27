@@ -123,12 +123,14 @@ class Profile extends Component {
         }
         try{
             await makeTransaction(this.props.authenticate.publickey, 'update_account', params,this.props.authenticate.secretkey)
+            // let avatar = await getAvatar(this.props.match.params.address)
+            // this.setState({file:avatar})
             alert('thanh cong')
         }
         catch (e) {
-            alert('loi')
+            //alert('loi')
         }
-
+        this.setState({checkUpdateAvatar:!this.state.checkUpdateAvatar })
         // let params = {
         //     object: 'CCB986DD05618567902B8E197B430B745D94312C6C4CFE0305135A2F3B924D78',
         //     content: {
@@ -156,7 +158,7 @@ class Profile extends Component {
                     {this.props.match.params.address===this.props.authenticate.publickey &&
                     <input type='file' onChange={this.handleFileChange} className="updateavatar" />
                     }
-                    {this.state.checkUpdateAvatar && <button style={{position: 'absolute', top: 400, left: 150}} onClick={() => this.uphinh()}>Luu</button>}
+                    {this.state.checkUpdateAvatar && <button style={{position: 'absolute', top: 400, left: 80}} onClick={() => this.uphinh()}>Luu</button>}
                     <Image alt="wallpaper" className="profile-bg" src={this.props.profile.background}/>
 
                     <div className="profile-navbar">

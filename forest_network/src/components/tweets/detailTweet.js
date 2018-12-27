@@ -41,6 +41,7 @@ class DetailTweet extends Component {
         let comments = await getInteractComment(this.props.data.hash)
         let reactions = await getInteractReaction(this.props.data.hash)
         let myavatar = await getAvatar(this.props.authenticate.publickey)
+        console.log(reactions)
         /*
         let noreacts = this.state.reactions.filter((react) => react.params.content.reaction === 0)
         let likes = this.state.reactions.filter((react) => react.params.content.reaction === 1)
@@ -53,7 +54,10 @@ class DetailTweet extends Component {
         */
         this.setState({avatar, name, time, myavatar, comments, reactions})
     }
+
+
     handlecomment = async () => {
+
         let params = {
             object: this.props.data.hash,
             content: {
@@ -93,6 +97,8 @@ class DetailTweet extends Component {
             console.log(e)
             alert('Lỗi')
         }
+
+        // const result = this.state.reactions.find(e => e.account === this.props.authenticate.publickey);
     }
 
     render() {
