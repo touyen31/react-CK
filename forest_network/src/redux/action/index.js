@@ -62,7 +62,16 @@ export const getAllMyStatus = async (publickey)=>{
     } catch (e) {
         return[]
     }
+}
 
+export const getStatusOnRelationship = async (publickey, pages) => {
+    const url ='http://localhost:5000/account/'+publickey+'/allstatus/'+pages
+    try {
+        let res = await axios.get(url);
+        return res.data.data
+    } catch (e) {
+        return[]
+    }
 }
 
 export const getFollowing =async (publickey)=>{
@@ -127,7 +136,7 @@ export const getTotalMoney = async (publickey)=>{
 }
 
 
-export const getAllStatusRelationship = async (publickey) => {
+export const getAllStatus = async (publickey) => {
     const url = 'http://localhost:5000/account/'+publickey+'/all'
     return await axios.get(url)
         .then(res=>{

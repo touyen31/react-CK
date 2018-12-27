@@ -1,10 +1,16 @@
 import React, {Component} from 'react'
 import '../tweets/Tweets.css'
 import {connect} from "react-redux";
-import {getAllMyStatus, getAllStatusRelationship, getAvatar, getFollowing} from "../../redux/action";
+import {
+    getAllMyStatus,
+    getAvatar,
+    getFollowing,
+    getStatusOnRelationship
+} from "../../redux/action";
 import makeTransaction from "../../lib/makeTransaction";
 import {Button, Image} from "react-bootstrap";
 import ItemTweet from "../tweets/ItemTweet";
+import InfiniteScroll from 'react-infinite-scroller';
 
 class NewsFeed extends Component {
     constructor(props) {
@@ -13,7 +19,9 @@ class NewsFeed extends Component {
             avatar: null,
             following: null,
             status: '',
-            dataNewsFeed: []
+            dataNewsFeed: [],
+            pages: 0,
+            isLoadMore: true
         }
     }
 
@@ -21,7 +29,7 @@ class NewsFeed extends Component {
         const myPublicKey = this.props.authenticate.publickey
         let avatar = await getAvatar(myPublicKey)
         let following = await getFollowing(myPublicKey)
-        let dataNewsFeed = await getAllStatusRelationship(myPublicKey)
+        let dataNewsFeed = await getStatusOnRelationship(myPublicKey, this.state.pages)
         this.setState({avatar, following, dataNewsFeed})
         /*
         let dataNewsFeed = await getAllMyStatus(myPublicKey)
@@ -69,6 +77,18 @@ class NewsFeed extends Component {
         }
     }
 
+    loadFunc = async ()=> {
+        this.setState({pages: this.state.pages + 1})
+        let data = await getStatusOnRelationship(this.props.authenticate.publickey, this.state.pages)
+        if (data.length === 0) {
+            this.setState({isLoadMore: false})
+        }
+        let newData = this.state.dataNewsFeed.concat(data)
+        this.setState({
+            dataNewsFeed: newData
+        })
+    }
+
     render() {
         return (
             <div className="tweetsaa">
@@ -79,7 +99,16 @@ class NewsFeed extends Component {
                     <Button className="btnfollow" onClick={() => this.handlePostStatus()}>Post</Button>
 
                 </div>
-                {this.state.dataNewsFeed.map((item, index) => <ItemTweet key={index} item={item}/>)}
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={this.loadFunc}
+                    hasMore={this.state.isLoadMore}
+                    loader={<div className="loader" key={0}>Loading ...</div>}
+                    threshold={300}
+                >
+                    {this.state.dataNewsFeed.map((item, index) => <ItemTweet key={index} item={item}/>)}
+                </InfiniteScroll>
+
             </div>
         )
     }
