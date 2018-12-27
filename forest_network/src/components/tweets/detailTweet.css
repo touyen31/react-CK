@@ -46,3 +46,19 @@
     white-space: nowrap;
     display: block;
 }
+
+.myreaction {
+    font-weight: bolder;
+}
+
+.like {
+    color: blue;
+}
+
+.love-angry {
+    color: red;
+}
+
+.haha-wow-sad {
+    color: orange;
+}

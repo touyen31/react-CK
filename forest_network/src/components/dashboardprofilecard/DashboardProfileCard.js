@@ -23,7 +23,7 @@ class DashboardProfileCard extends Component {
         let username = publicKey
         let avatar = await getAvatar(publicKey)
         let tweets = await getAllMyStatus(publicKey)
-        let following = await getFollower(publicKey)
+        let following = await getFollowing(publicKey)
         let countTweets = tweets.length
         let countFollowing = following.length
         this.setState({name, username, avatar, countTweets, countFollowing})
