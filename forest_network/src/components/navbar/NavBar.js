@@ -4,7 +4,7 @@ import {Button, Form, FormControl, Nav, Navbar, NavItem, Glyphicon, InputGroup, 
 import {withRouter} from 'react-router-dom'
 
 import connect from "react-redux/es/connect/connect";
-import {getAvatar} from "../../redux/action";
+import {getAvatar, unauthenticate} from "../../redux/action";
 
 class NavBar extends Component {
     constructor() {
@@ -18,6 +18,11 @@ class NavBar extends Component {
         let publicKey = this.props.authenticate.publickey
         let avatar = await getAvatar(publicKey)
         this.setState({avatar})
+    }
+
+    handleSignOut=()=>{
+        this.props.unauthenticate()
+       // this.props.history.push('/login')
     }
 
     render() {
@@ -46,7 +51,7 @@ class NavBar extends Component {
                             }
                         </NavItem>
                         <NavItem>
-                            <Button bsStyle="info" className="nav-tweet">Sign out</Button>
+                            <Button bsStyle="info" className="nav-tweet" onClick={()=>this.handleSignOut()}>Sign out</Button>
                         </NavItem>
                     </Nav>
                     <Nav pullRight inline>
@@ -63,5 +68,11 @@ class NavBar extends Component {
 const mapStateToProps = (state) => ({
     authenticate: state.appReducer.authenticate
 })
+const mapDispathToProps = (dispatch)=>({
 
-export default withRouter(connect(mapStateToProps, null)(NavBar));
+
+    unauthenticate:()=>dispatch(unauthenticate())
+
+})
+
+export default withRouter(connect(mapStateToProps, mapDispathToProps)(NavBar));

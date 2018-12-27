@@ -1,4 +1,4 @@
-import {UPDATEPROFILE, AUTHENTICATE, GETMYNAME, SAVEFOLLOWING} from '../action/index'
+import {UPDATEPROFILE, AUTHENTICATE, GETMYNAME, SAVEFOLLOWING, UNAUTHENTICATE} from '../action/index'
 
 const initialState={
     profile:{name:'', account:'@banhcom', tweets:20, following:100, follower:20, background:'https://pbs.twimg.com/profile_banners/824815001152135169/1533970929/1500x500', avatar:'https://i.ytimg.com/vi/SVbnYMMCZbM/hqdefault.jpg'},
@@ -47,6 +47,15 @@ const appReducer = (prevState = initialState, action) => {
                 authenticate: {
                     ...action.data,
                     isAuthenticated: true
+                }
+            }
+        case UNAUTHENTICATE:
+            return {
+                ...prevState,
+                authenticate: {
+                    publickey: null,
+                    secretkey: null,
+                    isAuthenticated: false
                 }
             }
         default:

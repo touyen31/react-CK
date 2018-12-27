@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import './Tweets.css'
-import './ItemTweet.css'
 import DetailTweet from "./detailTweet";
 import {getAvatar, getInteractComment, getInteractReaction, getmyname} from '../../redux/action'
 import {dateFormat} from 'dateformat'
