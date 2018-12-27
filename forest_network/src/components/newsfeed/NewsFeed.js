@@ -30,28 +30,7 @@ class NewsFeed extends Component {
         let avatar = await getAvatar(myPublicKey)
         let following = await getFollowing(myPublicKey)
         let dataNewsFeed = await getStatusOnRelationship(myPublicKey, this.state.pages)
-        this.setState({avatar, following, dataNewsFeed})
-        /*
-        let dataNewsFeed = await getAllMyStatus(myPublicKey)
-        this.setState({avatar, following, dataNewsFeed})
-
-        following.map( async account => {
-            let data = await getAllMyStatus(account)
-            let newDataNewsFeed = this.state.dataNewsFeed.concat(data)
-            newDataNewsFeed.sort((a, b) =>{
-                return new Date(b.time) - new Date(a.time)
-            })
-            this.setState({dataNewsFeed:newDataNewsFeed})
-        })
-        */
-        /*
-        let sortedDataNewsFeed = this.state.dataNewsFeed
-        sortedDataNewsFeed.sort((a, b) =>{
-            return new Date(b.date) - new Date(a.date)
-        })
-        console.log(sortedDataNewsFeed)
-        this.setState({dataNewsFeed:sortedDataNewsFeed})
-        */
+        this.setState({avatar, following, dataNewsFeed: this.state.dataNewsFeed.concat(dataNewsFeed), pages: this.state.pages+1})
     }
 
 
@@ -78,14 +57,13 @@ class NewsFeed extends Component {
     }
 
     loadFunc = async ()=> {
-        this.setState({pages: this.state.pages + 1})
         let data = await getStatusOnRelationship(this.props.authenticate.publickey, this.state.pages)
         if (data.length === 0) {
             this.setState({isLoadMore: false})
         }
-        let newData = this.state.dataNewsFeed.concat(data)
         this.setState({
-            dataNewsFeed: newData
+            dataNewsFeed: this.state.dataNewsFeed.concat(data),
+            pages: this.state.pages+1
         })
     }
 
@@ -104,7 +82,7 @@ class NewsFeed extends Component {
                     loadMore={this.loadFunc}
                     hasMore={this.state.isLoadMore}
                     loader={<div className="loader" key={0}>Loading ...</div>}
-                    threshold={300}
+                    threshold={200}
                 >
                     {this.state.dataNewsFeed.map((item, index) => <ItemTweet key={index} item={item}/>)}
                 </InfiniteScroll>

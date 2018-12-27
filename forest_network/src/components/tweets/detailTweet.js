@@ -22,15 +22,6 @@ class DetailTweet extends Component {
             comments: [],
             reactions: [],
             myreaction: null
-            /*
-            noreacts: [],
-            likes: [],
-            loves: [],
-            hahas: [],
-            wows: [],
-            sads: [],
-            angrys: []
-            */
         }
 
     }
@@ -43,18 +34,7 @@ class DetailTweet extends Component {
         let reactions = await getInteractReaction(this.props.data.hash)
         let myavatar = await getAvatar(this.props.authenticate.publickey)
         let myreaction = reactions.find(e => e._id === this.props.authenticate.publickey)
-        console.log(myreaction)
-        console.log(reactions)
-        /*
-        let noreacts = this.state.reactions.filter((react) => react.params.content.reaction === 0)
-        let likes = this.state.reactions.filter((react) => react.params.content.reaction === 1)
-        let loves = this.state.reactions.filter((react) => react.params.content.reaction === 2)
-        let hahas = this.state.reactions.filter((react) => react.params.content.reaction === 3)
-        let wows = this.state.reactions.filter((react) => react.params.content.reaction === 4)
-        let sads = this.state.reactions.filter((react) => react.params.content.reaction === 5)
-        let angrys = this.state.reactions.filter((react) => react.params.content.reaction === 6)
-        this.setState({avatar, name, time, myavatar, comments, reactions, noreacts, likes, loves, hahas, wows, sads, angrys})
-        */
+
         this.setState({avatar, name, time, comments, reactions, myavatar, myreaction})
     }
 
@@ -91,20 +71,15 @@ class DetailTweet extends Component {
         try {
             console.log(params)
             await makeTransaction(this.props.authenticate.publickey, 'interact', params, this.props.authenticate.secretkey)
-            //alert('Thành công')
             let reactions = await getInteractReaction(this.props.data.hash)
             console.log(reactions)
             this.setState({reactions: reactions})
+            alert('Thành công')
         }
         catch (e) {
             console.log(e)
-            //alert('Lỗi')
+            alert('Lỗi')
         }
-        // const result = this.state.reactions.find(e => e.account === this.props.authenticate.publickey);
-    }
-
-    postReaction = async (reaction) => {
-
     }
 
     render() {
